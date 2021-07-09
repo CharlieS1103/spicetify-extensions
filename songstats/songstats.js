@@ -28,11 +28,25 @@
             content: "Danceability: " + Math.round(100 * res.danceability) / 100 + " | | " + "Energy: " + Math.round(100 * res.energy) / 100 + " | | " + "Key: " + res.key + " | | " + "Loudness: " + res.loudness + " | | " + "Speechiness: " + Math.round(100 * res.speechiness) / 100 + " | | " + "Acousticness: " + Math.round(100 * res.acousticness) / 100 + " | | " + "Instrumentalness: " + Math.round(100 * res.instrumentalness) / 100 + " | | " + "Liveness: " + Math.round(100 * res.liveness) / 100 + " | | " + "Valence: " + Math.round(100 * res.valence) / 100 + " | | " + "Tempo: " + res.tempo,
         });
     }
+    function shouldDisplayContextMenu(uris) {
+        if (uris.length > 1) {
+            return false;
+        }
+
+        const uri = uris[0];
+        const uriObj = Spicetify.URI.fromString(uri);
+        if (uriObj.type === Spicetify.URI.Type.TRACK) {
+            return true;
+        }
+        return false;
+    }
+
+
     const cntxMenu = new Spicetify.ContextMenu.Item(
         buttontxt,
         getSongStats,
+        shouldDisplayContextMenu,
     );
+
     cntxMenu.register();
-
-
 })();
