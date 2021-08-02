@@ -16,7 +16,6 @@
     //Watch for when the song is changed
 
     async function getSongStats(uris) {
-        console.log("uwu");
         var request = new XMLHttpRequest();
         const uri = uris[0];
         const uriObj = Spicetify.URI.fromString(uri);
