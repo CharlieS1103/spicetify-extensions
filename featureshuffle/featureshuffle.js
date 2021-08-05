@@ -10,10 +10,7 @@
 
     const {
         CosmosAsync,
-        Player,
-        LocalStorage,
-        PlaybackControl,
-        ContextMenu,
+
         URI
     } = Spicetify;
     if (!(CosmosAsync && URI)) {
@@ -28,7 +25,6 @@
 
     async function makePlaylist(uris) {
         const uri = uris[0];
-        const uriObj = Spicetify.URI.fromString(uri);
         const uriFinal = uri.split(":")[2]
 
         const user = await CosmosAsync.get('https://api.spotify.com/v1/me')
@@ -60,11 +56,7 @@
 
         var avr2Energy
 
-        var avr2Acoustic
-
         var avr2Intrumentalness
-
-        var avr2Speechiness
 
         var avr2Liveness
         for (i = 0; i < playlistitems.length; i++) {
@@ -94,8 +86,6 @@
 
         avr2Dance = average(avrDanceability);
 
-        avr2Acoustic = average(avrAcousticness);
-
         avr2Tempo = average(avrTempo)
 
         avr2Energy = average(avrEnergy)
@@ -104,8 +94,19 @@
 
         avr2Liveness = average(avrLiveness)
 
-        avr2Speechiness = average(avrSpeechiness)
 
+        function randAlph(rndInt, ) {
+
+            const alphabet = "abcdefghijklmnopqrstuvwxyz"
+            const letters = []
+
+            for (var i = 0; i < rndInt; i++) {
+                const randomletter = alphabet[Math.floor(Math.random() * alphabet.length)]
+                letters.push(randomletter)
+            }
+            const string = letters.join("")
+            return (string)
+        }
 
 
         const randomSongrequest = [];
@@ -118,18 +119,7 @@
             var ranSong = getRandomSongsArray[Math.floor(Math.random() * getRandomSongsArray.length)];
 
 
-            function randAlph(rndInt, ) {
 
-                const alphabet = "abcdefghijklmnopqrstuvwxyz"
-                const letters = []
-
-                for (var i = 0; i < rndInt; i++) {
-                    const randomletter = alphabet[Math.floor(Math.random() * alphabet.length)]
-                    letters.push(randomletter)
-                }
-                const string = letters.join("")
-                return (string)
-            }
 
             const ranString = randAlph(rndInt)
 
@@ -144,27 +134,30 @@
 
 
 
-
+            let res2
 
             if (randomSongrequestToAppend[0] != undefined) {
+                try {
+                    res2 = await CosmosAsync.get('https://api.spotify.com/v1/audio-features/' + randomSongrequestToAppend[0].split(":")[2]);
+                    if (Math.round(100 * res2.liveness) / 100 >= avr2Liveness - 20 && Math.round(100 * res2.liveness) / 100 <= avr2Liveness + 20) {
 
-                let res2 = await CosmosAsync.get('https://api.spotify.com/v1/audio-features/' + randomSongrequestToAppend[0].split(":")[2]);
+                        if (res2.tempo >= avr2Tempo - 5 && res2.tempo <= avr2Tempo + 5) {
 
-                if (Math.round(100 * res2.liveness) / 100 >= avr2Liveness - 20 && Math.round(100 * res2.liveness) / 100 <= avr2Liveness + 20) {
+                            if (Math.round(100 * res2.instrumentalness) / 100 >= avr2Intrumentalness - 20 && Math.round(100 * res2.instrumentalness) / 100 <= avr2Intrumentalness + 20) {
 
-                    if (res2.tempo >= avr2Tempo - 5 && res2.tempo <= avr2Tempo + 5) {
+                                if (Math.round(100 * res2.energy) / 100 >= avr2Energy - 20 && Math.round(100 * res2.energy) / 100 <= avr2Energy + 20) {
 
-                        if (Math.round(100 * res2.instrumentalness) / 100 >= avr2Intrumentalness - 20 && Math.round(100 * res2.instrumentalness) / 100 <= avr2Intrumentalness + 20) {
+                                    if (Math.round(100 * res2.danceability) / 100 >= avr2Dance - 20 && Math.round(100 * res2.danceability) / 100 <= avr2Dance + 20) {
 
-                            if (Math.round(100 * res2.energy) / 100 >= avr2Energy - 20 && Math.round(100 * res2.energy) / 100 <= avr2Energy + 20) {
+                                        randomSongrequest.push(randomSongrequestToAppend[0])
+                                        console.log("Song passed")
+                                    } else {
 
-                                if (Math.round(100 * res2.danceability) / 100 >= avr2Dance - 20 && Math.round(100 * res2.danceability) / 100 <= avr2Dance + 20) {
-
-                                    randomSongrequest.push(randomSongrequestToAppend[0])
-                                    console.log("Song passed")
+                                        i--
+                                    }
                                 } else {
-
                                     i--
+
                                 }
                             } else {
                                 i--
@@ -178,28 +171,26 @@
                         i--
 
                     }
-                } else {
-                    i--
 
+                } catch (error) {
+                    console.log("Fuckin hell another error")
                 }
 
-            } else {
-                i--
+
+
 
             }
 
+
+
         }
-
-
-
-
         const newplaylist = await CosmosAsync.post('https://api.spotify.com/v1/users/' + user.id + '/playlists', {
             name: 'New Playlist'
         });
 
         const playlisturi = newplaylist.uri.split(":")[2]
 
-        const addToPlaylist = CosmosAsync.post('https://api.spotify.com/v1/playlists/' + playlisturi + '/tracks', {
+        CosmosAsync.post('https://api.spotify.com/v1/playlists/' + playlisturi + '/tracks', {
             uris: randomSongrequest
         });
 
