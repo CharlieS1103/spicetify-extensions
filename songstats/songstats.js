@@ -7,7 +7,7 @@
 /// <reference path="../globals.d.ts" />
 
 (function songstats() {
-    const { CosmosAsync, Player, LocalStorage, PlaybackControl, ContextMenu, URI } = Spicetify;
+    const { CosmosAsync, ContextMenu, URI } = Spicetify;
     if (!(CosmosAsync && URI)) {
         setTimeout(songstats, 300)
         return
