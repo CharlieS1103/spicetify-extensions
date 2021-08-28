@@ -12,7 +12,64 @@
         setTimeout(songstats, 300)
         return
     }
-    const buttontxt = "View Song Stats"
+    var local_language = Spicetify.Locale._locale
+    const translation = {
+        "en": {
+            "buttontxt": "View Song Stats",
+            "danceability": "Danceability",
+            "energy": "Energy",
+            "key": "Key",
+            "loudness": "Loudness",
+            "speechiness": "Speechiness",
+            "acousticness": "Acousticness",
+            "instrumentalness": "Instrumentalness",
+            "liveness": "Liveness",
+            "valence": "Valence",
+            "tempo": "Tempo",  
+        },
+        "fr": {
+            "buttontxt": "Voir les statistique de la musique",
+            "danceability": "Capacité à danser",
+            "energy": "Énergie",
+            "key": "Tonalité",
+            "loudness": "Intensité sonore",
+            "speechiness": "Élocution",
+            "acousticness": "Acoustique",
+            "instrumentalness": "instrumentalité",
+            "liveness": "vivacité",
+            "valence": "Mood",
+            "tempo": "Tempo",  
+        },
+        "fr-CA": {
+            "buttontxt": "Voir les statistique de la musique",
+            "danceability": "Capacité à danser",
+            "energy": "Énergie",
+            "key": "Tonalité",
+            "loudness": "Intensité sonore",
+            "speechiness": "Élocution",
+            "acousticness": "Acoustique",
+            "instrumentalness": "instrumentalité",
+            "liveness": "vivacité",
+            "valence": "Mood",
+            "tempo": "Tempo",  
+        }
+    }
+
+    try{translation[local_language]["buttontxt"]}
+    catch{local_language ="en"}
+    
+    const buttontxt = translation[local_language]["buttontxt"]
+    const danceability = translation[local_language]["danceability"]
+    const energy = translation[local_language]["energy"]
+    const key = translation[local_language]["key"]
+    const loudness = translation[local_language]["loudness"]
+    const speechiness = translation[local_language]["speechiness"]
+    const acousticness = translation[local_language]["acousticness"]
+    const instrumentalness = translation[local_language]["instrumentalness"]
+    const liveness = translation[local_language]["liveness"]
+    const valence = translation[local_language]["valence"]
+    const tempo = translation[local_language]["tempo"]
+
     //Watch for when the song is changed
 
     async function getSongStats(uris) {
@@ -24,7 +81,7 @@
 
         Spicetify.PopupModal.display({
             title: "Song Stats",
-            content: "Danceability: " + Math.round(100 * res.danceability) / 100 + " | | " + "Energy: " + Math.round(100 * res.energy) / 100 + " | | " + "Key: " + res.key + " | | " + "Loudness: " + res.loudness + " | | " + "Speechiness: " + Math.round(100 * res.speechiness) / 100 + " | | " + "Acousticness: " + Math.round(100 * res.acousticness) / 100 + " | | " + "Instrumentalness: " + Math.round(100 * res.instrumentalness) / 100 + " | | " + "Liveness: " + Math.round(100 * res.liveness) / 100 + " | | " + "Valence: " + Math.round(100 * res.valence) / 100 + " | | " + "Tempo: " + res.tempo,
+            content: `${danceability}: ${Math.round(100 * res.danceability) / 100} | ${energy}: ${Math.round(100 * res.energy) / 100} <br> ${key}: ${res.key} | ${loudness}: ${res.loudness} <br> ${speechiness}: ${Math.round(100 * res.speechiness) / 100} | ${acousticness}: ${Math.round(100 * res.acousticness) / 100} <br> ${instrumentalness}: ${Math.round(100 * res.instrumentalness) / 100} | ${liveness}: ${Math.round(100 * res.liveness) / 100} <br> ${valence}: ${Math.round(100 * res.valence) / 100} | ${tempo}: ${res.tempo}`,
         });
     }
     function shouldDisplayContextMenu(uris) {
