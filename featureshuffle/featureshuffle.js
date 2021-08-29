@@ -125,11 +125,12 @@
 
             const getRandomSongs = ranSong.replace("-", ranString)
 
-            const getRandomOffset = Math.floor(Math.random() * (600 - 1 + 1) + 1)
+            const getRandomOffset = Math.floor(Math.random() * (500 - 1 + 1) + 1)
 
             const url = "https://api.spotify.com/v1/search?q=" + getRandomSongs + '&offset=' + getRandomOffset + "&type=track&limit=1&market=US";
 
             const randomSongrequestToAppend = (await CosmosAsync.get(url)).tracks.items.map(track => track.uri);
+            console.log(randomSongrequestToAppend)
 
 
 
@@ -139,15 +140,15 @@
             if (randomSongrequestToAppend[0] != undefined) {
                 try {
                     res2 = await CosmosAsync.get('https://api.spotify.com/v1/audio-features/' + randomSongrequestToAppend[0].split(":")[2]);
-                    if (Math.round(100 * res2.liveness) / 100 >= avr2Liveness - 20 && Math.round(100 * res2.liveness) / 100 <= avr2Liveness + 20) {
+                    if (Math.round(100 * res2.liveness) / 100 >= avr2Liveness - 2 && Math.round(100 * res2.liveness) / 100 <= avr2Liveness + 2) {
 
                         if (res2.tempo >= avr2Tempo - 5 && res2.tempo <= avr2Tempo + 5) {
 
-                            if (Math.round(100 * res2.instrumentalness) / 100 >= avr2Intrumentalness - 20 && Math.round(100 * res2.instrumentalness) / 100 <= avr2Intrumentalness + 20) {
+                            if (Math.round(100 * res2.instrumentalness) / 100 >= avr2Intrumentalness - 2 && Math.round(100 * res2.instrumentalness) / 100 <= avr2Intrumentalness + 2) {
 
-                                if (Math.round(100 * res2.energy) / 100 >= avr2Energy - 20 && Math.round(100 * res2.energy) / 100 <= avr2Energy + 20) {
+                                if (Math.round(100 * res2.energy) / 100 >= avr2Energy - 2 && Math.round(100 * res2.energy) / 100 <= avr2Energy + 2) {
 
-                                    if (Math.round(100 * res2.danceability) / 100 >= avr2Dance - 20 && Math.round(100 * res2.danceability) / 100 <= avr2Dance + 20) {
+                                    if (Math.round(100 * res2.danceability) / 100 >= avr2Dance - 2 && Math.round(100 * res2.danceability) / 100 <= avr2Dance + 2) {
 
                                         randomSongrequest.push(randomSongrequestToAppend[0])
                                         console.log("Song passed")
