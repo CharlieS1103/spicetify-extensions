@@ -31,32 +31,10 @@
 
         const playlistitems = (await CosmosAsync.get('https://api.spotify.com/v1/playlists/' + uriFinal + '/tracks')).items.map(i => i.track.href);
 
+        const avrDanceability= [], avrTempo= [], avrEnergy= [], avrInstrumentalness= [], avrSpeechiness= [], avrLiveness = [];
 
+        var avr2Dance, avr2Tempo,avr2Energy,avr2Intrumentalness
 
-
-
-
-        const avrDanceability = [];
-
-        const avrTempo = [];
-
-        const avrEnergy = [];
-
-        const avrAcousticness = [];
-
-        const avrInstrumentalness = [];
-
-        const avrSpeechiness = [];
-
-        const avrLiveness = [];
-
-        var avr2Dance
-
-        var avr2Tempo
-
-        var avr2Energy
-
-        var avr2Intrumentalness
 
         var avr2Liveness
         for (i = 0; i < playlistitems.length; i++) {
@@ -71,8 +49,6 @@
             avrDanceability.push(Math.round(100 * res.danceability) / 100);
 
             avrEnergy.push(Math.round(100 * res.energy) / 100);
-
-            avrAcousticness.push(Math.round(100 * res.acousticness) / 100);
 
             avrInstrumentalness.push(Math.round(100 * res.instrumentalness) / 100);
 
@@ -136,43 +112,25 @@
 
 
             let res2
+            function validateSong(res2){
+            if (Math.round(100 * res2.liveness) / 100 >= avr2Liveness - 2 && Math.round(100 * res2.liveness) / 100 <= avr2Liveness + 2) {}else{return false}
+            if (res2.tempo >= avr2Tempo - 5 && res2.tempo <= avr2Tempo + 5) {}else{return false}
+            if (Math.round(100 * res2.instrumentalness) / 100 >= avr2Intrumentalness - 2 && Math.round(100 * res2.instrumentalness) / 100 <= avr2Intrumentalness + 2){}else{return false}
+             if (Math.round(100 * res2.energy) / 100 >= avr2Energy - 2 && Math.round(100 * res2.energy) / 100 <= avr2Energy + 2) {}else{return false}
+             if (Math.round(100 * res2.danceability) / 100 >= avr2Dance - 2 && Math.round(100 * res2.danceability) / 100 <= avr2Dance + 2){}else{return false}
+             return true
+            }
+
 
             if (randomSongrequestToAppend[0] != undefined) {
                 try {
                     res2 = await CosmosAsync.get('https://api.spotify.com/v1/audio-features/' + randomSongrequestToAppend[0].split(":")[2]);
-                    if (Math.round(100 * res2.liveness) / 100 >= avr2Liveness - 2 && Math.round(100 * res2.liveness) / 100 <= avr2Liveness + 2) {
-
-                        if (res2.tempo >= avr2Tempo - 5 && res2.tempo <= avr2Tempo + 5) {
-
-                            if (Math.round(100 * res2.instrumentalness) / 100 >= avr2Intrumentalness - 2 && Math.round(100 * res2.instrumentalness) / 100 <= avr2Intrumentalness + 2) {
-
-                                if (Math.round(100 * res2.energy) / 100 >= avr2Energy - 2 && Math.round(100 * res2.energy) / 100 <= avr2Energy + 2) {
-
-                                    if (Math.round(100 * res2.danceability) / 100 >= avr2Dance - 2 && Math.round(100 * res2.danceability) / 100 <= avr2Dance + 2) {
-
-                                        randomSongrequest.push(randomSongrequestToAppend[0])
-                                        console.log("Song passed")
-                                    } else {
-
-                                        i--
-                                    }
-                                } else {
-                                    i--
-
-                                }
-                            } else {
-                                i--
-
-                            }
-                        } else {
-                            i--
-
-                        }
-                    } else {
+                    if(validateSong(res2)){
+                    randomSongrequest.push(randomSongrequestToAppend[0])
+                    console.log("Song passed")
+                    }else{
                         i--
-
                     }
-
                 } catch (error) {
                     console.log("Fuckin hell another error")
                 }
