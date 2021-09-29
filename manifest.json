@@ -1,12 +1,14 @@
 {
+  "FeatureShuffle": {
     "name": "Feature-Shuffle",
     "description": "Spicetify extension to make a playlist based on another playlist's audio features",
     "preview": "",
     "main": "featureshuffle/featureshuffle.js"
-}
-{
-    "name": "songstats",
-    "description": "Spicetify extension to show the audio features of a song",
+  },
+  "SongStats": {
+    "name": "Song-Stats",
+    "descpiption": "Spicetify extension to display a song's audio features",
     "preview": "",
     "main": "songstats/songstats.js"
+  }
 }
