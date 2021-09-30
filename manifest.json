@@ -3,12 +3,12 @@
     "name": "Feature-Shuffle",
     "description": "Spicetify extension to make a playlist based on another playlist's audio features",
     "preview": "",
-    "main": "featureshuffle/featureshuffle.js"
+    "main": "/featureshuffle/featureshuffle.js"
   },
   {
     "name": "Song-Stats",
     "descpiption": "Spicetify extension to display a song's audio features",
     "preview": "",
-    "main": "songstats/songstats.js"
+    "main": "/songstats/songstats.js"
   }
 ]
