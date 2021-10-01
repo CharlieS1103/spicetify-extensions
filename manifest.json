@@ -7,7 +7,7 @@
   },
   {
     "name": "Song-Stats",
-    "descpiption": "Spicetify extension to display a song's audio features",
+    "description": "Spicetify extension to display a song's audio features",
     "preview": "/songstats/songstats.png",
     "main": "/songstats/songstats.js"
   }
