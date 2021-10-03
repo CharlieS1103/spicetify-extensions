@@ -18,13 +18,12 @@
 
     var styles = `
     body > generic-modal > div > div {
-    background-color: beige !important;
-    color: black !important;
-}
+        background-color: beige !important;
+        color: black !important;
+    }
 `
 
     var styleSheet = document.createElement("style")
-    styleSheet.type = "text/css"
     styleSheet.innerText = styles
     document.body.appendChild(styleSheet)
     async function getWikiText(uris) {
