@@ -12,30 +12,31 @@
         setTimeout(WikiFy, 10);
         return;
     }
-    console.log("WUT2")
+
     const buttontxt = "View Wiki"
     //Watch for when the song is changed
 //
-console.log("E")
+
     async function getWikiText(uris) {
 
         const rawUri = uris[0];
         const uri = rawUri.split(":")[2]
         const artistName = await CosmosAsync.get(`https://api.spotify.com/v1/artists/${uri}`)
         const artistNameTrimmed = (artistName.name).replace(/\s/g, "%20");
-        console.log(artistNameTrimmed)
+
        if(artistName != null){
            const wikiInfo = await CosmosAsync.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cdescription&titles=${artistNameTrimmed}`)
            
            //https://en.wikipedia.org/w/api.php?action=query&format=json&uselang=en&list=search&srsearch=${artistNameTrimmed}
-            console.log(wikiInfo)
+  
            const wikiInfoArr = wikiInfo.query.pages
       
            const page = Object.values(wikiInfoArr)[0];
-           console.log(page)
+
            var styles = `
     body > generic-modal > div > div {
     background-color: beige;
+    color: black
 }
 `
 
@@ -43,17 +44,24 @@ console.log("E")
            styleSheet.type = "text/css"
            styleSheet.innerText = styles
            document.body.appendChild(styleSheet)
+if(page.extract != null){
+    Spicetify.PopupModal.display({
+        title: "WikiFy",
+        content: page.extract
 
-           Spicetify.PopupModal.display({
-               title: "WikiFy",
-               content: page.extract
-               
-           });
+    });
+}else{
+    Spicetify.PopupModal.display({
+        title: "Error",
+        content: "Selected artist does not have a WikiPedia page, Sorry."
+
+    });
+}
+           
         
     }
     }
         function shouldDisplayContextMenu(uris) {
-            console.log(uris)
             if (uris.length > 1) {
                 return false;
             }
