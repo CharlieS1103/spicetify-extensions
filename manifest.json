@@ -10,5 +10,11 @@
     "description": "Spicetify extension to display a song's audio features",
     "preview": "songstats/songstats.png",
     "main": "songstats/songstats.js"
+  },
+{
+    "name": "WikiFy",
+    "description": "Shows an Artists wikipedia page to learn more about them",
+    "preview": "wikify/wikify.png",
+    "main": "wikify/wikify.js"
   }
 ]
