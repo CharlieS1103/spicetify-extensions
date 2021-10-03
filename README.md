@@ -8,3 +8,7 @@ Right click any song and click *View Song Stats* in the context menu
 Creates a randomized playlist based on the average audio features of the clicked playlist
 #### To use:
 Right click a playlist and click *Create Feature Based Playlist*, note that it may take up to ~3 minutes to generate a playlist.
+### Wikify:
+Display an Artists Wikipedia page and learn more about them!
+#### To use:
+Right click a playlist and click *View Wiki*
