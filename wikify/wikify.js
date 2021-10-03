@@ -18,8 +18,8 @@
 
     var styles = `
     body > generic-modal > div > div {
-    background-color: beige;
-    color: black
+    background-color: beige !important;
+    color: black !important;
 }
 `
 
@@ -47,7 +47,7 @@
             const page = Object.values(wikiInfoArr)[0];
               
                console.log(page.extract)
-               if (page.extract != null && page.extract != "undefined") {
+               if (page.extract != null) {
                    Spicetify.PopupModal.display({
                        title: "WikiFy",
                        content: page.extract
