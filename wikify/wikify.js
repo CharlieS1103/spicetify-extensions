@@ -7,15 +7,6 @@
 /// <reference path="../globals.d.ts" />
 (function WikiFy() {
 
-    const { CosmosAsync, URI } = Spicetify;
-    if (!(CosmosAsync && URI)) {
-        setTimeout(WikiFy, 10);
-        return;
-    }
-
-    const buttontxt = "View Wiki"
-    //Watch for when the song is changed
-
     var styles = `
     body > generic-modal > div > div {
         background-color: beige !important;
@@ -26,6 +17,16 @@
     var styleSheet = document.createElement("style")
     styleSheet.innerText = styles
     document.body.appendChild(styleSheet)
+
+    const { CosmosAsync, URI } = Spicetify;
+    if (!(CosmosAsync && URI)) {
+        setTimeout(WikiFy, 10);
+        return;
+    }
+
+    const buttontxt = "View Wiki"
+    //Watch for when the song is changed
+
     async function getWikiText(uris) {
 
         
