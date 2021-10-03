@@ -6,18 +6,18 @@
 
 /// <reference path="../globals.d.ts" />
 (function WikiFy() {
+    if (!document.body.classList.contains('wikify-injected')){
+    var styleSheet = document.createElement("style")
 
-    var styles = `
-    body > generic-modal > div > div {
+   
+    styleSheet.innerHTML= 
+        `body > generic-modal > div > div {
         background-color: beige !important;
         color: black !important;
-    }
-`
-
-    var styleSheet = document.createElement("style")
-    styleSheet.innerText = styles
+    }  `
     document.body.appendChild(styleSheet)
-
+        document.body.classList.add('wikify-injected');
+}
     const { CosmosAsync, URI } = Spicetify;
     if (!(CosmosAsync && URI)) {
         setTimeout(WikiFy, 10);
