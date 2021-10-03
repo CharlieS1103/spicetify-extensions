@@ -15,10 +15,21 @@
 
     const buttontxt = "View Wiki"
     //Watch for when the song is changed
-//
 
+    var styles = `
+    body > generic-modal > div > div {
+    background-color: beige;
+    color: black
+}
+`
+
+    var styleSheet = document.createElement("style")
+    styleSheet.type = "text/css"
+    styleSheet.innerText = styles
+    document.body.appendChild(styleSheet)
     async function getWikiText(uris) {
 
+        
         const rawUri = uris[0];
         const uri = rawUri.split(":")[2]
         const artistName = await CosmosAsync.get(`https://api.spotify.com/v1/artists/${uri}`)
@@ -34,17 +45,7 @@
       console.log(wikiInfoArr)
       console.log(Object.values(wikiInfoArr))
             const page = Object.values(wikiInfoArr)[0];
-               var styles = `
-    body > generic-modal > div > div {
-    background-color: beige;
-    color: black
-}
-`
-
-               var styleSheet = document.createElement("style")
-               styleSheet.type = "text/css"
-               styleSheet.innerText = styles
-               document.body.appendChild(styleSheet)
+              
                console.log(page.extract)
                if (page.extract != null) {
                    Spicetify.PopupModal.display({
