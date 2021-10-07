@@ -47,7 +47,7 @@
             const page = Object.values(wikiInfoArr)[0];
               
                console.log(page.extract)
-               if (page.extract != null) {
+               if (page.extract != null || page.extract != undefined) {
                    Spicetify.PopupModal.display({
                        title: "WikiFy",
                        content: page.extract
