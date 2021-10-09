@@ -37,18 +37,15 @@
     
        if(artistName != null){
            try{
-           const wikiInfo = await CosmosAsync.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cdescription&titles=${artistNameTrimmed}`).catch(function(){
-               console.log("REquest failed")
-           })
+           const wikiInfo = await CosmosAsync.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cdescription&titles=${artistNameTrimmed}`)
            
            //https://en.wikipedia.org/w/api.php?action=query&format=json&uselang=en&list=search&srsearch=${artistNameTrimmed}
   
            const wikiInfoArr = wikiInfo.query.pages
             const page = Object.values(wikiInfoArr)[0];
-
-       
-               
-               if (page.extract != null && !(page.hasOwnProperty("missing"))) {
+              
+    
+               if (page.extract != null) {
                    Spicetify.PopupModal.display({
                        title: "WikiFy",
                        content: page.extract
@@ -61,10 +58,10 @@
 
                    });
                }
-           }catch(error){
+           }catch{
 Spicetify.PopupModal.display({
     title: "Error",
-    content: error,
+    content: "Request failed",
 })
            }
     
