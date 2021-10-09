@@ -37,7 +37,9 @@
     
        if(artistName != null){
            try{
-           const wikiInfo = await CosmosAsync.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cdescription&titles=${artistNameTrimmed}`)
+           const wikiInfo = await CosmosAsync.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cdescription&titles=${artistNameTrimmed}`).catch(function(){
+               console.log("REquest failed")
+           })
            
            //https://en.wikipedia.org/w/api.php?action=query&format=json&uselang=en&list=search&srsearch=${artistNameTrimmed}
   
@@ -59,10 +61,10 @@
 
                    });
                }
-           }catch{
+           }catch(error){
 Spicetify.PopupModal.display({
     title: "Error",
-    content: "Request failed",
+    content: error,
 })
            }
     
