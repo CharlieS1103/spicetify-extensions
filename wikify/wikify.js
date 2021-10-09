@@ -45,9 +45,9 @@
       console.log(wikiInfoArr)
       console.log(Object.values(wikiInfoArr))
             const page = Object.values(wikiInfoArr)[0];
-              
-               console.log(page.extract || page.hasOwnProperty("missing"))
-               if (page.extract != null) {
+               console.log(page.hasOwnProperty("missing"))
+               console.log(page.extract )
+               if (page.extract != null || page.hasOwnProperty("missing")) {
                    Spicetify.PopupModal.display({
                        title: "WikiFy",
                        content: page.extract
