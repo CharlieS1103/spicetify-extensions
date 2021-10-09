@@ -42,6 +42,7 @@
            //https://en.wikipedia.org/w/api.php?action=query&format=json&uselang=en&list=search&srsearch=${artistNameTrimmed}
   
            const wikiInfoArr = wikiInfo.query.pages
+           console.log("weee")
       console.log(wikiInfoArr)
       console.log("Object: " + Object.values(wikiInfoArr))
             const page = Object.values(wikiInfoArr)[0];
