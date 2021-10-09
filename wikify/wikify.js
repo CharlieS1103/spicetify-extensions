@@ -43,8 +43,9 @@
   
            const wikiInfoArr = wikiInfo.query.pages
       console.log(wikiInfoArr)
-      console.log(Object.values(wikiInfoArr))
+      console.log("Object: " + Object.values(wikiInfoArr))
             const page = Object.values(wikiInfoArr)[0];
+            console.log("error right here")
                console.log("Missing: " + page.hasOwnProperty("missing"))
                console.log("Extract: " + page.extract)
                
