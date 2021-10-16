@@ -34,7 +34,7 @@ spicetify apply
 ## Usage
 Toggle in the Profile menu.
 
-[![Screenshot](screenshot.png)](https://raw.githubusercontent.com/CharlieS1103/spicetify-extensions/main/FeatureShuffle/FeatureShuffle.pngs)
+[![Screenshot](screenshot.png)](https://raw.githubusercontent.com/CharlieS1103/spicetify-extensions/main/FeatureShuffle/FeatureShuffle.png)
 
 ## More
 🌟 Like it? Gimme some love!    
