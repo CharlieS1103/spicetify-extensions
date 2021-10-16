@@ -13,7 +13,7 @@
     "main": "songstats/songstats.js",
     "readme": "songstats/README.md"
   },
-{
+  {
     "name": "WikiFy",
     "description": "Shows an Artists wikipedia page to learn more about them",
     "preview": "wikify/wikify.png",
