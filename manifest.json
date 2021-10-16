@@ -5,6 +5,7 @@
     "preview": "featureshuffle/featureshuffle.png",
     "main": "featureshuffle/featureshuffle.js",
     "readme": "featureshuffle/README.md"
+  },
   {
     "name": "Song-Stats",
     "description": "Spicetify extension to display a song's audio features",
