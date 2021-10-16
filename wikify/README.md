@@ -1,8 +1,8 @@
-# spicetify-hide-podcasts
-[Spicetify](https://github.com/khanhas/spicetify-cli) extension to hide podcasts. 
+# Wikify
+[Spicetify](https://github.com/khanhas/spicetify-cli) extension to learn more about an artist. 
 * Right click an artist on spotify and click "View Wiki", it will display a Wikipedia page for the artist in your spotify client!
 ## Install
-Copy `hidePodcasts.js` into your [Spicetify](https://github.com/khanhas/spicetify-cli) extensions directory:
+Copy `wikify.js` into your [Spicetify](https://github.com/khanhas/spicetify-cli) extensions directory:
 | **Platform** | **Path**                                                                            |
 |------------|-----------------------------------------------------------------------------------|
 | **Linux**      | `~/.config/spicetify/Extensions` or `$XDG_CONFIG_HOME/.config/spicetify/Extensions/` |
@@ -34,11 +34,11 @@ spicetify apply
 ## Usage
 Toggle in the Profile menu.
 
-[![Screenshot](screenshot.png)](https://raw.githubusercontent.com/CharlieS1103/spicetify-extensions/wikify/wikify.png)
+[![Screenshot](screenshot.png)](https://raw.githubusercontent.com/CharlieS1103/spicetify-extensions/main/wikify/wikify.pngs)
 
 ## More
 🌟 Like it? Gimme some love!    
 [![Github Stars badge](https://img.shields.io/github/stars/CharlieS1103/spicetify-extensions?logo=github&style=social)](https://github.com/CharlieS1103/spicetify-extensions/)
 
-If you find any bugs or places where podcasts are still showing up, please [create a new issue](https://github.com/CharlieS1103/spicetify-extensions/issues/new/choose) on the GitHub repo.    
+If you find any bugs, please [create a new issue](https://github.com/CharlieS1103/spicetify-extensions/issues/new/choose) on the GitHub repo.    
 ![https://github.com/CharlieS1103/spicetify-extensions/issues](https://img.shields.io/github/issues/CharlieS1103/spicetify-extensions?logo=github)
