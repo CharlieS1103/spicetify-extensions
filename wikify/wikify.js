@@ -6,18 +6,7 @@
 
 /// <reference path="../globals.d.ts" />
 (function WikiFy() {
-    if (!document.body.classList.contains('wikify-injected')){
-    var styleSheet = document.createElement("style")
-
-   
-    styleSheet.innerHTML= 
-        `body > generic-modal > div > div {
-        background-color: beige !important;
-        color: black !important;
-    }  `
-    document.body.appendChild(styleSheet)
-        document.body.classList.add('wikify-injected');
-}
+  
     const { CosmosAsync, URI } = Spicetify;
     if (!(CosmosAsync && URI)) {
         setTimeout(WikiFy, 10);
@@ -43,15 +32,21 @@
   
            const wikiInfoArr = wikiInfo.query.pages
             const page = Object.values(wikiInfoArr)[0];
-              
-    
                if (page.extract != null) {
                    Spicetify.PopupModal.display({
                        title: "WikiFy",
                        content: page.extract
-
                    });
-               } else {
+                   var styleSheet = document.createElement("wikify-style")
+                   styleSheet.innerHTML =
+      `body > generic-modal > div > div {
+        background-color: beige !important;
+        color: black !important;
+    }  `
+    document.body.appendChild(styleSheet)
+                const closeButton = document.querySelector("body > generic-modal > div > div > div > div.main-trackCreditsModal-header > button");
+                   closeButton.setAttribute("onclick", `remove(document.body.wikify-style)`);
+                } else {
                    Spicetify.PopupModal.display({
                        title: "Error",
                        content: "Selected artist does not have a WikiPedia page, Sorry."
