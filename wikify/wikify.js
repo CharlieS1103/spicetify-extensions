@@ -1,8 +1,8 @@
 //@ts-check
 
-// NAME: SongStats
+// NAME: Wikify
 // AUTHOR: CharlieS1103
-// DESCRIPTION: View a songs stats, such as dancability and acousticness.
+// DESCRIPTION: View an artists wikipedia page to learn more about them
 
 /// <reference path="../globals.d.ts" />
 (function WikiFy() {
