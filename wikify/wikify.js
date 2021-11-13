@@ -46,7 +46,7 @@
         if (artistName != null) {
             try {
                 const wikiInfo = await CosmosAsync.get(`https://${lang}.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cdescription&titles=${artistNameTrimmed}`)
-                //TODO: option to choose local language or english
+                //TODO: option to choose local language or english / english fallback? / subcontextmenu to choose?
                 //https://en.wikipedia.org/w/api.php?action=query&format=json&uselang=en&list=search&srsearch=${artistNameTrimmed}
 
                 const wikiInfoArr = wikiInfo.query.pages

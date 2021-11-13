@@ -3,18 +3,21 @@
     "name": "Feature-Shuffle",
     "description": "Spicetify extension to make a playlist based on another playlist's audio features",
     "preview": "featureshuffle/featureshuffle.png",
-    "main": "featureshuffle/featureshuffle.js"
+    "main": "featureshuffle/featureshuffle.js",
+    "readme": "featureshuffle/README.md"
   },
   {
     "name": "Song-Stats",
     "description": "Spicetify extension to display a song's audio features",
     "preview": "songstats/songstats.png",
-    "main": "songstats/songstats.js"
+    "main": "songstats/songstats.js",
+    "readme": "songstats/README.md"
   },
-{
+  {
     "name": "WikiFy",
     "description": "Shows an Artists wikipedia page to learn more about them",
     "preview": "wikify/wikify.png",
-    "main": "wikify/wikify.js"
+    "main": "wikify/wikify.js",
+    "readme": "wikify/README.md"
   }
 ]
