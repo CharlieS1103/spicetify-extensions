@@ -81,7 +81,7 @@
 
         Spicetify.PopupModal.display({
             title: "Song Stats",
-            content: `${danceability}: ${Math.round(100 * res.danceability) / 100} | ${energy}: ${Math.round(100 * res.energy) / 100} <br> ${key}: ${res.key} | ${loudness}: ${res.loudness} <br> ${speechiness}: ${Math.round(100 * res.speechiness) / 100} | ${acousticness}: ${Math.round(100 * res.acousticness) / 100} <br> ${instrumentalness}: ${Math.round(100 * res.instrumentalness) / 100} | ${liveness}: ${Math.round(100 * res.liveness) / 100} <br> ${valence}: ${Math.round(100 * res.valence) / 100} | ${tempo}: ${res.tempo}`,
+            content: `${danceability}: ${Math.round(100 * res.danceability)}% | ${energy}: ${Math.round(100 * res.energy)}% <br> ${key}: ${res.key} | ${loudness}: ${res.loudness} <br> ${speechiness}: ${Math.round(100 * res.speechiness)}% | ${acousticness}: ${Math.round(100 * res.acousticness)}% <br> ${instrumentalness}: ${Math.round(100 * res.instrumentalness)}% | ${liveness}: ${Math.round(100 * res.liveness)}% <br> ${valence}: ${Math.round(100 * res.valence)}% | ${tempo}: ${res.tempo} BPM`,
         });
     }
     function shouldDisplayContextMenu(uris) {
