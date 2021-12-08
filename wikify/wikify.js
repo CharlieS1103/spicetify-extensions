@@ -37,13 +37,12 @@
     }
 
     async function getWikiText(uris) {
-
         const rawUri = uris[0];
         const uri = rawUri.split(":")[2]
-        const artistName = await CosmosAsync.get(`https://api.spotify.com/v1/artists/${uri}`)
-        const artistNameTrimmed = (artistName.name).replace(/\s/g, "%20");
-
-        if (artistName != null) {
+        const track = await CosmosAsync.get(`https://api.spotify.com/v1/tracks/${uri}`);
+        if (track != null) {
+            const artistName = track["artists"][0]["name"];
+            const artistNameTrimmed = artistName.replace(/\s/g, "%20");
             try {
                 const wikiInfo = await CosmosAsync.get(`https://${lang}.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cdescription&titles=${artistNameTrimmed}`)
                 //TODO: option to choose local language or english / english fallback? / subcontextmenu to choose?
