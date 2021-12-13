@@ -4,7 +4,7 @@
 // AUTHOR: CharlieS1103
 // DESCRIPTION: View a songs stats, such as dancability and acousticness.
 
-/// <reference path="../globals.d.ts" />
+/// <reference path="../../spicetify-cli/globals.d.ts" />
 
 (function songstats() {
     const { CosmosAsync, ContextMenu, URI } = Spicetify;

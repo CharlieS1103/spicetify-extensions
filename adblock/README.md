@@ -1,6 +1,6 @@
 # FeatureShuffle
-[Spicetify](https://github.com/khanhas/spicetify-cli) extension to create playlists based off of another playlists audio features.. 
-* Right click a playlist and click "Create Feature Based Playlist" (This process may take up to 3 minutes.)
+[Spicetify](https://github.com/khanhas/spicetify-cli) extension to block all audio ads, will block UI ads in the near future as well
+* Simply run the extension and it will work!
 ## Install
 Copy `FeatureShuffle.js` into your [Spicetify](https://github.com/khanhas/spicetify-cli) extensions directory:
 | **Platform** | **Path**                                                                            |
@@ -11,7 +11,7 @@ Copy `FeatureShuffle.js` into your [Spicetify](https://github.com/khanhas/spicet
 
 After putting the extension file into the correct folder, run the following command to install the extension:
 ```
-spicetify config extensions FeatureShuffle.js
+spicetify config extensions adblock.js
 spicetify apply
 ```
 Note: Using the `config` command to add the extension will always append the file name to the existing extensions list. It does not replace the whole key's value.
@@ -22,7 +22,7 @@ Example:
 ```ini
 [AdditionalOptions]
 ...
-extensions = autoSkipExplicit.js|shuffle+.js|trashbin.js|FeatureShuffle.js
+extensions = autoSkipExplicit.js|shuffle+.js|trashbin.js|adblock.js
 ```
 
 Then run:
@@ -34,7 +34,7 @@ spicetify apply
 ## Usage
 Toggle in the Profile menu.
 
-[![Screenshot](screenshot.png)](https://raw.githubusercontent.com/CharlieS1103/spicetify-extensions/main/FeatureShuffle/FeatureShuffle.png)
+[![Screenshot](screenshot.png)](https://raw.githubusercontent.com/CharlieS1103/spicetify-extensions/main/adblock/adblock.png)
 
 ## More
 🌟 Like it? Gimme some love!    

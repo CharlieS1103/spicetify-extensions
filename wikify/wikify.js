@@ -4,7 +4,7 @@
 // AUTHOR: CharlieS1103
 // DESCRIPTION: View an artists wikipedia page to learn more about them
 
-/// <reference path="../globals.d.ts" />
+/// <reference path="../../spicetify-cli/globals.d.ts" />
 (function WikiFy() {
     if (!document.body.classList.contains('wikify-injected')) {
         var styleSheet = document.createElement("style")

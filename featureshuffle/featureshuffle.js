@@ -4,7 +4,7 @@
 // AUTHOR: CharlieS1103
 // DESCRIPTION: Create a playlist based on the average features of a playlist
 
-/// <reference path="../globals.d.ts" />
+/// <reference path="../../spicetify-cli/globals.d.ts" />
 
 (function songstats() {
 
