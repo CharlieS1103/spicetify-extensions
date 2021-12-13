@@ -1,8 +1,8 @@
 # FeatureShuffle
-[Spicetify](https://github.com/khanhas/spicetify-cli) extension to block all audio ads, will block UI ads in the near future as well
+[Spicetify](https://github.com/khanhas/spicetify-cli) extension to block all audio ads and UI ads
 * Simply run the extension and it will work!
 ## Install
-Copy `FeatureShuffle.js` into your [Spicetify](https://github.com/khanhas/spicetify-cli) extensions directory:
+Copy `adblock.js` into your [Spicetify](https://github.com/khanhas/spicetify-cli) extensions directory:
 | **Platform** | **Path**                                                                            |
 |------------|-----------------------------------------------------------------------------------|
 | **Linux**      | `~/.config/spicetify/Extensions` or `$XDG_CONFIG_HOME/.config/spicetify/Extensions/` |
