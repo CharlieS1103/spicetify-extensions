@@ -12,13 +12,24 @@
         setTimeout(adblock, 300)
         return
     }
+    
+    var styleSheet = document.createElement("style")
+
+    styleSheet.innerHTML =
+     `
+    .MnW5SczTcbdFHxLZ_Z8j, .WiPggcPDzbwGxoxwLWFf {
+    display: none !important;
+    }
+    `
+      
+    document.body.appendChild(styleSheet)
     delayAds()
 
     function delayAds() {
         console.log("Ads delayed: Adblock.js")
         Spicetify.Platform.AdManagers.audio.audioApi.cosmosConnector.increaseStreamTime(-100000000000)
+        Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.setAdState(-100000000000)
     }
- console.log("wut")
     setInterval(delayAds, 720 *10000);
 })() 
 
