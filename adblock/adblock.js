@@ -21,14 +21,14 @@
     display: none !important;
     }
     `
-      
     document.body.appendChild(styleSheet)
+    Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.fetchAdForSlot = 0
     delayAds()
 
     function delayAds() {
         console.log("Ads delayed: Adblock.js")
         Spicetify.Platform.AdManagers.audio.audioApi.cosmosConnector.increaseStreamTime(-100000000000)
-        Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.setAdState(-100000000000)
+        Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.increaseStreamTime(-100000000000)
     }
     setInterval(delayAds, 720 *10000);
 })() 
