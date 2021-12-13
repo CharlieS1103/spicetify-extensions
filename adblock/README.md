@@ -1,4 +1,4 @@
-# FeatureShuffle
+# Adblock
 [Spicetify](https://github.com/khanhas/spicetify-cli) extension to block all audio ads and UI ads
 * Simply run the extension and it will work!
 ## Install
