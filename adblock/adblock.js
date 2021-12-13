@@ -8,7 +8,7 @@
 
 (function adblock() {
  
-    setInterval(function () {delayAds}, 720 *10000);
+    setInterval(delayAds, 720 *10000);
 })() 
 
 
