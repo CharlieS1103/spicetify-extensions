@@ -13,7 +13,6 @@
 
 
 function delayAds() {
-    Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.increaseStreamTime(-7500);
-    Spicetify.Platform.AdManagers.audio.audioApi.cosmosConnector.increaseStreamTime(-7500)
-    Spicetify.Platform.AdManagers.leaderboard.leaderboardApi.cosmosConnector.increaseStreamTime(-7500)
+    Spicetify.Platform.AdManagers.audio.audioApi.cosmosConnector.increaseStreamTime(-100000000000)
+    console.log("Ads delayed: Adblock.js")
 }
