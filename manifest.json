@@ -19,5 +19,13 @@
     "preview": "wikify/wikify.png",
     "main": "wikify/wikify.js",
     "readme": "wikify/README.md"
+  },
+  {
+  "name": "Adblock",
+    "description": "Block all audio ads, UI ads to come soon",
+    "preview": "adblock/adblock.png",
+    "main": "adblock/adblock.js",
+    "readme": "adblock/README.md"
+
   }
 ]
