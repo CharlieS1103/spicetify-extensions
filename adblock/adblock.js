@@ -17,7 +17,7 @@
 
     styleSheet.innerHTML =
      `
-    .MnW5SczTcbdFHxLZ_Z8j, .WiPggcPDzbwGxoxwLWFf {
+    .MnW5SczTcbdFHxLZ_Z8j, .WiPggcPDzbwGxoxwLWFf, .ReyA3uE3K7oEz7PTTnAn {
     display: none !important;
     }
     `
