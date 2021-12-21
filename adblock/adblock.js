@@ -25,11 +25,13 @@
     delayAds()
     var billboard = Spicetify.Platform.AdManagers.billboard.displayBillboard;
     Spicetify.Platform.AdManagers.billboard.displayBillboard = function (arguments) {
+        Spicetify.Platform.AdManagers.billboard.finish()
         // hook before call
         var ret = billboard.apply(this, arguments);
         // hook after call
         console.log("Adblock.js: Billboard blocked! Leave a star!")
         Spicetify.Platform.AdManagers.billboard.finish()
+        setTimeout(() => { Spicetify.Platform.AdManagers.billboard.finish(); }, 2000);
         return ret;
     };
     function delayAds() {
