@@ -23,9 +23,15 @@
     `
     document.body.appendChild(styleSheet)
     delayAds()
-    createHook(Spicetify.Platform.AdManagers.billboard.displayBillboard, "createEvent", (stage, args, ret) => {
-        Spicetify.Platform.AdManagers.billboard.finish();
-    })
+    var billboard = Spicetify.Platform.AdManagers.billboard.displayBillboard;
+    Spicetify.Platform.AdManagers.billboard.displayBillboard = function (arguments) {
+        // hook before call
+        var ret = billboard.apply(this, arguments);
+        // hook after call
+        console.log("Adblock.js: Billboard blocked! Leave a star!")
+        Spicetify.Platform.AdManagers.billboard.finish()
+        return ret;
+    };
     function delayAds() {
         console.log("Ads delayed: Adblock.js")
         Spicetify.Platform.AdManagers.audio.audioApi.cosmosConnector.increaseStreamTime(-100000000000)
@@ -33,23 +39,6 @@
     }
     setInterval(delayAds, 720 *10000);
 
-    function createHook(obj, funcName, detour) {
-        let originalFunc = obj[funcName];
-        obj[funcName] = function (...args) {
-            detour("pre", args);
-
-            let ret = originalFunc.apply(this, args);
-            if (ret instanceof Promise) {
-                return ret.then(val => {
-                    detour("post", args, val);
-                    return val;
-                });
-            } else {
-                detour("post", args, ret);
-                return ret;
-            }
-        }
-    }
    
 })() 
 
