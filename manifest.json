@@ -22,7 +22,7 @@
   },
   {
   "name": "Adblock",
-    "description": "Block all audio ads and UI ads: Error prone atm but should work for audio at least.",
+    "description": "Block all audio ads and UI ads!",
     "preview": "adblock/adblock.png",
     "main": "adblock/adblock.js",
     "readme": "adblock/README.md"
