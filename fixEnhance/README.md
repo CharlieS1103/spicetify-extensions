@@ -1,6 +1,9 @@
 # FixEnhance
 [Spicetify](https://github.com/khanhas/spicetify-cli) extension to patch the enhance playlist feature on Spotify
-* Simply run the extension and it will work!
+* In order to work, you must have experimental features enabled on Spicetify:
+``spicetify config experimental_features 1``
+``spicetify apply``
+You must also enable the "Enable Enhance Playlist UI and functionality" feature in the experimental features menu.
 ## Install
 Copy `fixEnhance.js` into your [Spicetify](https://github.com/khanhas/spicetify-cli) extensions directory:
 | **Platform** | **Path**                                                                            |
