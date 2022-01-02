@@ -104,7 +104,7 @@ async function queuePlaylist() {
             (async function () {
                 const songJson = await searchSong(songNameSplit, artistName)
          
-                songArr.push(songJson.tracks.items[0].id)
+                songArr.push("spotify:track:" + songJson.tracks.items[0].id)
             })()
         }
 
@@ -116,7 +116,8 @@ async function queuePlaylist() {
 function playQueue(uris){
     Spicetify.Platform.PlayerAPI.clearQueue();
     if(Spicetify.Player.getShuffle()){
-        uris = shuffle(uris)
+        setTimeout(() => { uris = shuffle(uris) }, 1000);
+       
         console.log(uris)
     }
     setTimeout(() => { Spicetify.Player.origin._queue.addToQueue(uris.map(track => { return { uri: track } })) }, 1000);
