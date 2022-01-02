@@ -27,5 +27,13 @@
     "main": "adblock/adblock.js",
     "readme": "adblock/README.md"
 
+  },
+  {
+  "name": "FixEnhance",
+    "description": "Patch the enhance feature on spotify",
+    "preview": "fixEnhance/fixEnhance.png",
+    "main": "fixEnhance/fixEnhance.js",
+    "readme": "fixEnhance/README.md"
+
   }
 ]
