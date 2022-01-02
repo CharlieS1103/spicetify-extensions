@@ -64,10 +64,6 @@ function patchPlayButtons(pathname) {
                         Spicetify.Player.playUri("spotify:track:" + songJson.tracks.items[0].id)
                     })()
 
-
-
-
-
                 }, false);
             }
         }
@@ -85,6 +81,7 @@ function patchPlaylistQueue() {
     const enhanceButton = document.createElement("button")
     enhanceButton.innerText = "Play Enhance!"
     enhanceButton.onclick = function () { queuePlaylist()}
+    enhanceButton.className = "ccdA-D"
     actionBar.appendChild(enhanceButton)
 }
 
@@ -112,22 +109,23 @@ async function queuePlaylist() {
         }
 
     }
+    console.log(songArr)
     playQueue(songArr)
 
 }
-async function playQueue(uris){
+function playQueue(uris){
     Spicetify.Platform.PlayerAPI.clearQueue();
     if(Spicetify.Player.getShuffle()){
         uris = shuffle(uris)
+        console.log(uris)
     }
     setTimeout(() => { Spicetify.Player.origin._queue.addToQueue(uris.map(track => { return { uri: track } })) }, 1000);
     Spicetify.Platform.PlayerAPI.skipToNext()
 }
-function shuffle(array){
+function shuffle(array) {
     let shuffled = array
         .map((value) => ({ value, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
         .map(({ value }) => value)
-
-    return shuffled
+    return shuffled;
 }
