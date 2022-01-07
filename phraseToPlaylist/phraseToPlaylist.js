@@ -36,6 +36,7 @@ function createTextArea(){
     container.innerHTML = `
 <textarea id="playlist-phrase-box" name="playlist-phrase-box" rows="4" cols="30" placeholder="Input phrase here!"></textarea>
   <br><br>
+  <span id="phrase-loading-indicator" name="phrase-loading-indicator" >0/0</span>
   <button value="Submit" id="playlist-phrase-submit">Submit Phrase</button>
     `;
     return container;
@@ -62,9 +63,13 @@ async function generatePlaylist(phrase){
         if (phrase[i].toLowerCase() in songMap) {
             songArr.push("spotify:track:" + songMap[phrase[i]])
         } else {
+             // TODO: Optimize this! I could save the phrase to a specific song so repeating words would go much faster
             const songJson = await searchSong(phrase[i]);
             songArr.push("spotify:track:" + songJson.id)
-            console.log(i + "/" + phrase.length)
+            var span = document.querySelector("#phrase-loading-indicator"),
+                text = document.createTextNode('' +  i + "/" + phrase.length);
+            span.innerHTML = ''; // clear existing
+            span.appendChild(text);
         }
         
             
@@ -73,6 +78,7 @@ async function generatePlaylist(phrase){
 }
 
 async function searchSong(songName) {
+   
     let songFound = false;
     const fallBackSongJson = await Spicetify.CosmosAsync.get('https://api.spotify.com/v1/search?q=track:' + songName + '&type=track&limit=50')
     while(!songFound){
