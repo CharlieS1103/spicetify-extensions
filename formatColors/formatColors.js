@@ -13,7 +13,7 @@
         return
     }
  new Spicetify.Topbar.Button(
-        "Take notes",
+        "Format Colors",
         BUTTON_ICON,
         convertColorSheet,
         false
