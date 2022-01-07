@@ -48,7 +48,6 @@ function convertColorSheet(cssText){
                 title: "Formatted Colors",
                 content: htmlElement,
             });
-            Spicetify.showNotification("Copied formatted Colors.")
         }
     }
 

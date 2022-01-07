@@ -132,7 +132,7 @@
                         i--
                     }
                 } catch (error) {
-                    console.log("Fuckin hell another error")
+                    console.warn(error)
                 }
 
 

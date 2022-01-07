@@ -42,5 +42,12 @@
     "preview": "formatColors/formatColors.png",
     "main": "formatColors/formatColors.js",
     "readme": "formatColors/README.md"
+  },
+    {
+  "name": "Phrase to Playlist",
+    "description": "Convert a phrase into a playlist with songs arraged to make that phrase",
+    "preview": "phraseToPlaylist/phraseToPlaylist.png",
+    "main": "phraseToPlaylist/phraseToPlaylist.js",
+    "readme": "phraseToPlaylist/README.md"
   }
 ]

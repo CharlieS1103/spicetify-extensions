@@ -27,4 +27,8 @@ You must also enable the "Enable Enhance Playlist UI and functionality" feature 
 *Convert the current colors defined in root to color.ini format, made for Theme Developers.*
 #### To use:
 * Click the button on the topbar, right click the text and click copy.
+## PhraseToPlaylist:
+*Convert a phrase into a playlist with songs arraged to make that phrase*
+#### To use:
+* Click the button on the topbar, enter phrase, click submit.
 

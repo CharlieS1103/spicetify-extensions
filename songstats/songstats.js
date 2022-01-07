@@ -12,6 +12,7 @@
         setTimeout(songstats, 300)
         return
     }
+    // @ts-ignore
     var local_language = Spicetify.Locale._locale
     const translation = {
         "en": {
