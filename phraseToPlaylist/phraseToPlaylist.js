@@ -35,7 +35,7 @@ function createTextArea(){
     container.innerHTML = `
 <textarea id="playlist-phrase-box" name="playlist-phrase-box" rows="4" cols="30" placeholder="Input phrase here!"></textarea>
   <br><br>
-  <button value="Submit" id="playlist-phrase-submit">Submit CSS</button>
+  <button value="Submit" id="playlist-phrase-submit">Submit Phrase</button>
     `;
     return container;
 }
