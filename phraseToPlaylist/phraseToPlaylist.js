@@ -55,6 +55,7 @@ async function addCustomCssListeners() {
 }
 
 async function generatePlaylist(phrase){
+    phrase = phrase.replace(/\s+/g, ' ')
     phrase = phrase.split(" ");
     const songArr = []
     offset = "";
