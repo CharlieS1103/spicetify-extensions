@@ -35,5 +35,12 @@
     "main": "fixEnhance/fixEnhance.js",
     "readme": "fixEnhance/README.md"
 
+  },
+  {
+  "name": "Format colors",
+    "description": "Convert the current colors defined in root to color.ini format, for theme developers",
+    "preview": "formatColors/formatColors.png",
+    "main": "formatColors/formatColors.js",
+    "readme": "formatColors/README.md"
   }
 ]
