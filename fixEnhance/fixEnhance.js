@@ -1,3 +1,7 @@
+// NAME: fixEnhance
+// AUTHOR: CharlieS1103
+// DESCRIPTION: Patch enhance feature: Not currently needed
+
 (function fixEnhance() {
 
 
