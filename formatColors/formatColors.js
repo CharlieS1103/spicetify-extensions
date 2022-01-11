@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 
 // NAME: formatColors
 // AUTHOR: CharlieS1103
@@ -23,9 +23,12 @@
 })()
 
 
-function convertColorSheet(cssText){
+function convertColorSheet(){
     for (const sheet of document.styleSheets) {
-        if (sheet.href == "https://xpui.app.spotify.com/colors.css") {
+        // TODO: Fix the wall of ignores
+        // @ts-ignore
+        if (sheet.href == "https://xpui.app.spotify.com/colors.css" || sheet.ownerNode.classList[1] == "marketplaceScheme") {
+            console.log("test")
             let cssText = sheet.rules[0].cssText
             // @ts-ignore
             cssText = cssText.replaceAll(":root {", "");
@@ -39,15 +42,22 @@ function convertColorSheet(cssText){
             cssText = cssText.replaceAll("--spice-", "")
             // @ts-ignore
             cssText = cssText.replaceAll("#", "")
-
-            const formatted =  cssText.substring(0, cssText.indexOf("rgb"))
+            // @ts-ignore
+            cssText = cssText.replaceAll("}", "")
+       
+            console.log(cssText)
+         
+                
             const regex = /\\n|\\r\\n|\\n\\r|\\r/g;
-           
-            const htmlElement = `<span  style="user-select: all;">${formatted.replace(regex, '<br>')}</span>`
+            const reg = /rgb.*?\\n/gm;
+            cssText = cssText.replace(reg, '') 
+            console.log(cssText)
+            const htmlElement = `<span  style="user-select: all;">${cssText.replace(regex, '<br>')}</span>`
             Spicetify.PopupModal.display({
                 title: "Formatted Colors",
                 content: htmlElement,
             });
+            break;
         }
     }
 
