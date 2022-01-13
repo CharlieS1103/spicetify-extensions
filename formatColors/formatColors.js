@@ -28,7 +28,6 @@ function convertColorSheet(){
         // TODO: Fix the wall of ignores
         // @ts-ignore
         if (sheet.href == "https://xpui.app.spotify.com/colors.css" || sheet.ownerNode.classList[1] == "marketplaceScheme") {
-            console.log("test")
             let cssText = sheet.rules[0].cssText
             // @ts-ignore
             cssText = cssText.replaceAll(":root {", "");
@@ -44,14 +43,10 @@ function convertColorSheet(){
             cssText = cssText.replaceAll("#", "")
             // @ts-ignore
             cssText = cssText.replaceAll("}", "")
-       
-            console.log(cssText)
-         
-                
             const regex = /\\n|\\r\\n|\\n\\r|\\r/g;
             const reg = /rgb.*?\\n/gm;
             cssText = cssText.replace(reg, '') 
-            console.log(cssText)
+    
             const htmlElement = `<span  style="user-select: all;">${cssText.replace(regex, '<br>')}</span>`
             Spicetify.PopupModal.display({
                 title: "Formatted Colors",
