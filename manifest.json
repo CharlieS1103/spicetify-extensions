@@ -1,13 +1,13 @@
 [
   {
-    "name": "Feature-Shuffle",
+    "name": "Feature Shuffle",
     "description": "Spicetify extension to make a playlist based on another playlist's audio features",
     "preview": "featureshuffle/featureshuffle.png",
     "main": "featureshuffle/featureshuffle.js",
     "readme": "featureshuffle/README.md"
   },
   {
-    "name": "Song-Stats",
+    "name": "Song Stats",
     "description": "Spicetify extension to display a song's audio features",
     "preview": "songstats/songstats.png",
     "main": "songstats/songstats.js",
@@ -29,7 +29,7 @@
 
   },
   {
-  "name": "FixEnhance",
+  "name": "Fix Enhance",
     "description": "Patch the enhance feature on spotify",
     "preview": "fixEnhance/fixEnhance.png",
     "main": "fixEnhance/fixEnhance.js",
@@ -49,5 +49,12 @@
     "preview": "phraseToPlaylist/phraseToPlaylist.png",
     "main": "phraseToPlaylist/phraseToPlaylist.js",
     "readme": "phraseToPlaylist/README.md"
+  },
+  {
+  "name": "Skip Silence",
+    "description": "Skip the silence at the end of songs for constant music",
+    "preview": "skipSilence/skipSilence.png",
+    "main": "skipSilence/skipSilence.js",
+    "readme": "skipSilence/README.md"
   }
 ]
