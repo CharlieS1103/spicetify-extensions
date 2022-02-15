@@ -49,12 +49,5 @@
     "preview": "phraseToPlaylist/phraseToPlaylist.png",
     "main": "phraseToPlaylist/phraseToPlaylist.js",
     "readme": "phraseToPlaylist/README.md"
-  },
-  {
-  "name": "Skip Silence",
-    "description": "Skip the silence at the end of songs for constant music",
-    "preview": "skipSilence/skipSilence.png",
-    "main": "skipSilence/skipSilence.js",
-    "readme": "skipSilence/README.md"
   }
 ]
