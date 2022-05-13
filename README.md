@@ -1,5 +1,5 @@
 # spicetify-extensions
-Random extensions for spicetify i'm creating
+
 ## Song-Stats: 
 *Displays the audio features of a song*
 #### To use:
