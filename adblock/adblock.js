@@ -31,7 +31,19 @@
         // hook after call
         console.log("Adblock.js: Billboard blocked! Leave a star!")
         Spicetify.Platform.AdManagers.billboard.finish()
-        setTimeout(() => { Spicetify.Platform.AdManagers.billboard.finish(); }, 2000);
+        const observer = new MutationObserver((mutations, obs) => {
+            const billboardAd = document.getElementById('view-billboard-ad');
+            if (billboardAd) {
+                Spicetify.Platform.AdManagers.billboard.finish()
+                obs.disconnect();
+                return;
+            }
+        });
+
+        observer.observe(document, {
+            childList: true,
+            subtree: true
+        });
         return ret;
     };
     function delayAds() {
