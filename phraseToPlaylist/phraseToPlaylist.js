@@ -123,7 +123,7 @@ async function searchSong(songName) {
 }
 
 async function createPlaylist(songArr){
-    const randomName = await Spicetify.CosmosAsync.get('https://random-word-api.herokuapp.com/word?number=1&swear=0')
+    const randomName = await Spicetify.CosmosAsync.get('https://random-word-api.herokuapp.com/word?number=1')
     const user = await Spicetify.CosmosAsync.get('https://api.spotify.com/v1/me')
     const newplaylist = await Spicetify.CosmosAsync.post('https://api.spotify.com/v1/users/' + user.id + '/playlists', {
         name: randomName[0]
