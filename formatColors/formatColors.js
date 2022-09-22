@@ -53,20 +53,14 @@ function convertColorSheet(){
         // @ts-ignore
         if (sheet.href == "https://xpui.app.spotify.com/colors.css" || sheet.ownerNode.classList[1] == "marketplaceScheme") {
             let cssText = sheet.rules[0].cssText
-            // @ts-ignore
             cssText = cssText.replaceAll(":root {", "");
-            // @ts-ignore
             cssText = cssText.replaceAll("{", "");
-            // @ts-ignore
             cssText = cssText.replaceAll(";", `\\n`)
-            // @ts-ignore
             cssText = cssText.replaceAll(":", "         =")
-            // @ts-ignore
             cssText = cssText.replaceAll("--spice-", "")
-            // @ts-ignore
             cssText = cssText.replaceAll("#", "")
-            // @ts-ignore
             cssText = cssText.replaceAll("}", "")
+            cssText = cssText.replaceAll("!important", "")
             const regex = /\\n|\\r\\n|\\n\\r|\\r/g;
             const reg = /rgb.*?\\n/gm;
             cssText = cssText.replace(reg, '') 
@@ -76,6 +70,8 @@ function convertColorSheet(){
                 title: "Formatted Colors",
                 content: htmlElement,
             });
+            Spicetify.Platform.ClipboardAPI.copy(cssText)
+            Spicetify.showNotification("Copied to clipboard")
             break;
         }
     }
