@@ -17,8 +17,46 @@
 
     styleSheet.innerHTML =
      `
-    .MnW5SczTcbdFHxLZ_Z8j, .WiPggcPDzbwGxoxwLWFf, .ReyA3uE3K7oEz7PTTnAn, .main-leaderboardComponent-container, .sponsor-container, a.link-subtle.main-navBar-navBarLink.GKnnhbExo0U9l7Jz2rdc{
-    display: none !important;
+    /* Top Context menu upgrade button hide */
+    .main-contextMenu-menuItem a[href="https://www.spotify.com/premium/"] {
+        display: none !important;
+    }
+
+    /* Remove upgrade button near username */
+    button[title="Upgrade to Premium"],
+    button[aria-label="Upgrade to Premium"],
+    .main-topBar-UpgradeButton {
+        display: none !important;
+    }
+
+    /* Ad placeholder */
+    .main-leaderboardComponent-container,
+    .ReyA3uE3K7oEz7PTTnAn,
+    .X871RxPwx9V0MqpQdMom {
+        display: none !important;
+    }
+
+    /* Home page ad section */
+    .desktoproutes-homepage-takeover-ad-hptoComponent-parentContainer {
+        display: none !important;
+    }
+
+    /* Remove sponsor ads in playlists */
+    .sponsor-container {
+        display: none !important;
+    }
+
+    /* Remove sponsored playlist in homepage */
+    .WiPggcPDzbwGxoxwLWFf,
+    .DHeG1dij5qSIc9nr0wDj,
+    .hx2D0g_ursHte5bm62U2 {
+        display: none !important;
+    }
+
+    /* Misc */
+    .MnW5SczTcbdFHxLZ_Z8j,
+    a.link-subtle.main-navBar-navBarLink.GKnnhbExo0U9l7Jz2rdc {
+        display: none !important;
     }
     `
     document.body.appendChild(styleSheet)
