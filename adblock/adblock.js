@@ -17,46 +17,151 @@
 
     styleSheet.innerHTML =
      `
-    /* Top Context menu upgrade button hide */
-    .main-contextMenu-menuItem a[href="https://www.spotify.com/premium/"] {
-        display: none !important;
-    }
+    /* BEGIN: Daksh777 (https://github.com/Daksh777/SpotifyNoPremium) */
 
-    /* Remove upgrade button near username */
-    button[title="Upgrade to Premium"],
-    button[aria-label="Upgrade to Premium"],
-    .main-topBar-UpgradeButton {
-        display: none !important;
+    /* Context menu upgrade button */
+    .upgrade-button,
+    button[data-menu-item="upgrade-account"],
+    .main-contextMenu-menuItem a[href="https://www.spotify.com/premium/"],
+    button[id="upgradeAccount"] {
+    display: none !important;
     }
 
     /* Ad placeholder */
-    .main-leaderboardComponent-container,
-    .ReyA3uE3K7oEz7PTTnAn,
-    .X871RxPwx9V0MqpQdMom {
-        display: none !important;
+    .main-leaderboardComponent-container {
+    display: none !important;
+    }
+
+    /* Upgrade button */
+    .main-topBar-UpgradeButton,
+    .Button-y0gtbx-0[aria-label="Upgrade to Premium"] {
+    display: none !important;
+    }
+
+    /* Pointer cursors for accessibility */
+    .show-followButton-button,
+    .main-dropDown-dropDown,
+    .x-toggle-wrapper,
+    .main-playlistEditDetailsModal-closeBtn,
+    .main-trackList-rowPlayPauseButton,
+    .main-rootlist-rootlistItemLink:link,
+    .main-rootlist-rootlistItemLink:visited,
+    .x-sortBox-sortDropdown,
+    .main-contextMenu-menuItemButton,
+    .main-trackList-column,
+    .main-moreButton-button,
+    .x-downloadButton-button,
+    .main-playButton-PlayButton,
+    .main-coverSlotExpandedCollapseButton-chevron,
+    .main-coverSlotCollapsed-chevron,
+    .control-button:focus,
+    .control-button:hover,
+    .main-repeatButton-button,
+    .main-skipForwardButton-button,
+    .main-playPauseButton-button,
+    .main-skipBackButton-button,
+    .main-shuffleButton-button,
+    .main-addButton-button,
+    .progress-bar__slider,
+    .main-editImageButton-image,
+    button {
+    cursor: pointer !important;
     }
 
     /* Home page ad section */
     .desktoproutes-homepage-takeover-ad-hptoComponent-parentContainer {
-        display: none !important;
+    display: none !important;
+    }
+
+    /* Remove download button */
+    .x-downloadButton-DownloadButton {
+    display: none !important;
+    }
+
+    /* Context menu download button */
+    .main-contextMenu-disabled:not([as=a]) {
+    display: none !important;
     }
 
     /* Remove sponsor ads in playlists */
     .sponsor-container {
-        display: none !important;
+    display: none !important
+    }
+
+    /* For update 1.1.74+ */
+
+    /* Ad placeholder */
+    .X871RxPwx9V0MqpQdMom {
+    display: none !important
+    }
+
+    /* Upgrade button */
+    .Qt5xfSWikz6CLU8Vobxs[aria-label="Upgrade to Premium"] {
+    display: none !important
+    }
+
+    /* Context menu upgrade button */
+    .DuEPSADpSwCcO880xjUG a[href="https://www.spotify.com/premium/"] {
+    display: none !important
+    }
+
+    /* Download button */
+    .BKsbV2Xl786X9a09XROH {
+    display: none !important
+    }
+
+    /* Context menu download button */
+    .wC9sIed7pfp47wZbmU6m[aria-disabled="true"] {
+    display: none !important
+    }
+
+    /* Remove top padding above create playlist button */
+    .eFQFeXVbY8rrcTagg0oH {
+    margin-top: 0 !important
+    }
+
+    /* Remove upgrade button for v1.1.78 */
+    .main-buttons-button[title="Upgrade to Premium"] {
+    display: none !important
     }
 
     /* Remove sponsored playlist in homepage */
     .WiPggcPDzbwGxoxwLWFf,
     .DHeG1dij5qSIc9nr0wDj,
     .hx2D0g_ursHte5bm62U2 {
-        display: none !important;
+    display: none !important
     }
 
-    /* Misc */
+    /* Remove top padding above create playlist button for 1.1.84+ */
+    .LKgm9fCDTO7wqig_5U1q {
+    margin-top: 0 !important
+    }
+
+    /* Ad placeholder for 1.1.86+ */
+    .ReyA3uE3K7oEz7PTTnAn {
+    display: none !important
+    }
+
+    /* Remove extra padding for 1.1.89+ */
+    .main-rootlist-rootlist {
+    margin-top: 0 !important
+    }
+
+    /* END: Daksh777 (https://github.com/Daksh777/SpotifyNoPremium) */
+
+    /* BEGIN: Tetrax-10 (https://github.com/Tetrax-10/Nord-Spotify) */
+
+    /* Remove upgrade button near username */
+    button[title="Upgrade to Premium"],
+    button[aria-label="Upgrade to Premium"] {
+    display: none !important;
+    }
+
+    /* END Tetrax-10 (https://github.com/Tetrax-10/Nord-Spotify) */
+
     .MnW5SczTcbdFHxLZ_Z8j,
     a.link-subtle.main-navBar-navBarLink.GKnnhbExo0U9l7Jz2rdc {
-        display: none !important;
+    display: none !important;
     }
     `
     document.body.appendChild(styleSheet)
