@@ -38,36 +38,6 @@
     display: none !important;
     }
 
-    /* Pointer cursors for accessibility */
-    .show-followButton-button,
-    .main-dropDown-dropDown,
-    .x-toggle-wrapper,
-    .main-playlistEditDetailsModal-closeBtn,
-    .main-trackList-rowPlayPauseButton,
-    .main-rootlist-rootlistItemLink:link,
-    .main-rootlist-rootlistItemLink:visited,
-    .x-sortBox-sortDropdown,
-    .main-contextMenu-menuItemButton,
-    .main-trackList-column,
-    .main-moreButton-button,
-    .x-downloadButton-button,
-    .main-playButton-PlayButton,
-    .main-coverSlotExpandedCollapseButton-chevron,
-    .main-coverSlotCollapsed-chevron,
-    .control-button:focus,
-    .control-button:hover,
-    .main-repeatButton-button,
-    .main-skipForwardButton-button,
-    .main-playPauseButton-button,
-    .main-skipBackButton-button,
-    .main-shuffleButton-button,
-    .main-addButton-button,
-    .progress-bar__slider,
-    .main-editImageButton-image,
-    button {
-    cursor: pointer !important;
-    }
-
     /* Home page ad section */
     .desktoproutes-homepage-takeover-ad-hptoComponent-parentContainer {
     display: none !important;
@@ -115,11 +85,6 @@
     display: none !important
     }
 
-    /* Remove top padding above create playlist button */
-    .eFQFeXVbY8rrcTagg0oH {
-    margin-top: 0 !important
-    }
-
     /* Remove upgrade button for v1.1.78 */
     .main-buttons-button[title="Upgrade to Premium"] {
     display: none !important
@@ -132,19 +97,11 @@
     display: none !important
     }
 
-    /* Remove top padding above create playlist button for 1.1.84+ */
-    .LKgm9fCDTO7wqig_5U1q {
-    margin-top: 0 !important
-    }
-
     /* Ad placeholder for 1.1.86+ */
-    .ReyA3uE3K7oEz7PTTnAn {
+    .ReyA3uE3K7oEz7PTTnAn,
+    .Root__main-view > div:nth-child(2),
+    .Root__modal-slot .GenericModal__overlay.QMMTQfEw3AIHFf4dTRp3.nPKDEvIoCzySBR24pZiN {
     display: none !important
-    }
-
-    /* Remove extra padding for 1.1.89+ */
-    .main-rootlist-rootlist {
-    margin-top: 0 !important
     }
 
     /* END: Daksh777 (https://github.com/Daksh777/SpotifyNoPremium) */
