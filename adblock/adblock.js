@@ -98,9 +98,7 @@
     }
 
     /* Ad placeholder for 1.1.86+ */
-    .ReyA3uE3K7oEz7PTTnAn,
-    .Root__main-view > div:nth-child(2),
-    .Root__modal-slot .GenericModal__overlay.QMMTQfEw3AIHFf4dTRp3.nPKDEvIoCzySBR24pZiN {
+    .ReyA3uE3K7oEz7PTTnAn{
     display: none !important
     }
 
