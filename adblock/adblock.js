@@ -29,7 +29,6 @@
         // hook before call
         var ret = billboard.apply(this, arguments);
         // hook after call
-        console.log("Adblock.js: Billboard blocked! Leave a star!")
         Spicetify.Platform.AdManagers.billboard.finish()
         const observer = new MutationObserver((mutations, obs) => {
             const billboardAd = document.getElementById('view-billboard-ad');
