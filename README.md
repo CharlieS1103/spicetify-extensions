@@ -32,3 +32,4 @@ You must also enable the "Enable Enhance Playlist UI and functionality" feature 
 #### To use:
 * Click the button on the topbar, enter phrase, click submit.
 
+Thanks!
