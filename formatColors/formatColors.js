@@ -55,12 +55,13 @@ function convertColorSheet(){
             let cssText = sheet.rules[0].cssText
             cssText = cssText.replaceAll(":root {", "");
             cssText = cssText.replaceAll("{", "");
-            cssText = cssText.replaceAll(";", `\\n`)
             cssText = cssText.replaceAll(":", "         =")
             cssText = cssText.replaceAll("--spice-", "")
             cssText = cssText.replaceAll("#", "")
             cssText = cssText.replaceAll("}", "")
             cssText = cssText.replaceAll("!important", "")
+            Spicetify.Platform.ClipboardAPI.copy(cssText)
+            cssText = cssText.replaceAll(";", `\\n`)
             const regex = /\\n|\\r\\n|\\n\\r|\\r/g;
             const reg = /rgb.*?\\n/gm;
             cssText = cssText.replace(reg, '') 
@@ -70,7 +71,7 @@ function convertColorSheet(){
                 title: "Formatted Colors",
                 content: htmlElement,
             });
-            Spicetify.Platform.ClipboardAPI.copy(cssText)
+            
             Spicetify.showNotification("Copied to clipboard")
             break;
         }
