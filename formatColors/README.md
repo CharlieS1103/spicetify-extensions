@@ -10,7 +10,7 @@ Copy `formatColors.js` into your [Spicetify](https://github.com/khanhas/spicetif
 | **MacOS**      | `~/spicetify_data/Extensions` or `$SPICETIFY_CONFIG/Extensions`                      |
 | **Windows**    | `%appdata%\spicetify\Extensions\`                                              |
 
-After putting the extension file into the correct folder, run the following command to install the extension:
+After putting the extension file into the correct folder, run the following command to install the extension or install through marketplace:
 ```
 spicetify config extensions formatColors.js
 spicetify apply

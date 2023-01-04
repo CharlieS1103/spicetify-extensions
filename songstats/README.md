@@ -9,7 +9,7 @@ Copy `songstats.js` into your [Spicetify](https://github.com/khanhas/spicetify-c
 | **MacOS**      | `~/spicetify_data/Extensions` or `$SPICETIFY_CONFIG/Extensions`                      |
 | **Windows**    | `%appdata%\spicetify\Extensions\`                                              |
 
-After putting the extension file into the correct folder, run the following command to install the extension:
+After putting the extension file into the correct folder, run the following command to install the extension or install through marketplace:
 ```
 spicetify config extensions songstats.js
 spicetify apply
