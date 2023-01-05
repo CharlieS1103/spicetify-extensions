@@ -119,7 +119,39 @@
                                     <div style="height: calc(100% - 224px);"></div>
                                     <div style="height: 224px;"></div>
                                  </div>
-                                 <div style="transform: translateY(0px);">
+                                 **SECONDINJECTIONPOINT**
+                                 <div class="main-rootlist-bottomSentinel" style="height: calc(100% - 224px + 224px);">
+                                    <div style="height: 224px;"></div>
+                                    <div style="height: calc(100% - 224px);"></div>
+                                 </div>
+                              </div>
+                           </ul>
+                           <div class="main-rootlist-dropIndicator"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
+                     <div class="os-scrollbar-track">
+                        <div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div>
+                     </div>
+                  </div>
+                  <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-unusable os-scrollbar-auto-hidden">
+                     <div class="os-scrollbar-track">
+                        <div class="os-scrollbar-handle" style="height: 100%; transform: translate(0px, 0px);"></div>
+                     </div>
+                  </div>
+                  <div class="os-scrollbar-corner"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="Foyk_HJx16yh22JYmQ56"></div>
+   </div>
+   <div class="LayoutResizer__resize-bar LayoutResizer__inline-end" style="z-index: 1;"><label class="hidden-visually">Resize main navigation<input class="LayoutResizer__input" type="range" min="120" max="384" step="10" value="244"></label></div>
+`
+// Add the customAppHTML to the old HTML at the injection point 
+    /*
+    <div style="transform: translateY(0px);">
                                     <div class="GlueDropTarget GlueDropTarget--albums GlueDropTarget--tracks GlueDropTarget--local-tracks GlueDropTarget--episodes GlueDropTarget--playlists GlueDropTarget--folders">
                                        <li role="listitem" class="main-rootlist-rootlistItem" draggable="true" style="--indentation:0;">
                                           <div aria-hidden="true" class="main-rootlist-rootlistItemOverlay"></div>
@@ -176,37 +208,7 @@
                                        </li>
                                     </div>
                                  </div>
-                                 <div class="main-rootlist-bottomSentinel" style="height: calc(100% - 224px + 224px);">
-                                    <div style="height: 224px;"></div>
-                                    <div style="height: calc(100% - 224px);"></div>
-                                 </div>
-                              </div>
-                           </ul>
-                           <div class="main-rootlist-dropIndicator"></div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
-                     <div class="os-scrollbar-track">
-                        <div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div>
-                     </div>
-                  </div>
-                  <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-unusable os-scrollbar-auto-hidden">
-                     <div class="os-scrollbar-track">
-                        <div class="os-scrollbar-handle" style="height: 100%; transform: translate(0px, 0px);"></div>
-                     </div>
-                  </div>
-                  <div class="os-scrollbar-corner"></div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="Foyk_HJx16yh22JYmQ56"></div>
-   </div>
-   <div class="LayoutResizer__resize-bar LayoutResizer__inline-end" style="z-index: 1;"><label class="hidden-visually">Resize main navigation<input class="LayoutResizer__input" type="range" min="120" max="384" step="10" value="244"></label></div>
-`
-// Add the customAppHTML to the old HTML at the injection point 
-    
+                                 */
     const customAppHTML = createCustomAppHtml(document.getElementsByClassName("Root__nav-bar")[0]);
     if(customAppHTML == undefined){
        console.log("Error")
