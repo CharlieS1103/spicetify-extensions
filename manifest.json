@@ -29,14 +29,6 @@
 
   },
   {
-  "name": "Fix Enhance",
-    "description": "Patch the enhance feature on spotify",
-    "preview": "fixEnhance/fixEnhance.png",
-    "main": "fixEnhance/fixEnhance.js",
-    "readme": "fixEnhance/README.md"
-
-  },
-  {
   "name": "Format colors",
     "description": "Convert the current colors defined in root to color.ini format, for theme developers",
     "preview": "formatColors/formatColors.png",
