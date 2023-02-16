@@ -6,14 +6,18 @@
 
 /// <reference path="../../spicetify-cli/globals.d.ts" />
 
-(function oldSidebar() {
+(async function oldSidebar() {
     const { Platform } = Spicetify;
     // Also wait till the sidebar is loaded
-   if (!(Platform) || !document.querySelector('.Root__nav-bar') || document.getElementsByClassName("main-topBar-navLink").length < 2) {
+   if (!(Platform) || !document.querySelector('.Root__nav-bar') || document.querySelector('.main-rootlist-topSentinel')) {
         setTimeout(oldSidebar, 10)
         console.log("Waiting for sidebar to load")
         return
     }
+    // Sleep using await and a promise
+      const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+      // Wait for the sidebar to load a little more
+      await sleep(3000);
     let oldHTML = `
    <div class="main-navBar-navBar">
       <ul class="main-navBar-entryPoints">
@@ -119,7 +123,7 @@
                                     <div style="height: calc(100% - 224px);"></div>
                                     <div style="height: 224px;"></div>
                                  </div>
-                                 **SECONDINJECTIONPOINT**
+                                 **SECONDINJECTION**
                                  <div class="main-rootlist-bottomSentinel" style="height: calc(100% - 224px + 224px);">
                                     <div style="height: 224px;"></div>
                                     <div style="height: calc(100% - 224px);"></div>
@@ -149,78 +153,22 @@
    </div>
    <div class="LayoutResizer__resize-bar LayoutResizer__inline-end" style="z-index: 1;"><label class="hidden-visually">Resize main navigation<input class="LayoutResizer__input" type="range" min="120" max="384" step="10" value="244"></label></div>
 `
-// Add the customAppHTML to the old HTML at the injection point 
-    /*
-    <div style="transform: translateY(0px);">
-                                    <div class="GlueDropTarget GlueDropTarget--albums GlueDropTarget--tracks GlueDropTarget--local-tracks GlueDropTarget--episodes GlueDropTarget--playlists GlueDropTarget--folders">
-                                       <li role="listitem" class="main-rootlist-rootlistItem" draggable="true" style="--indentation:0;">
-                                          <div aria-hidden="true" class="main-rootlist-rootlistItemOverlay"></div>
-                                          <a class="standalone-ellipsis-one-line main-rootlist-rootlistItemLink" draggable="false" tabindex="-1" href="/playlist/3bQQKzh2ubk6qYHbzJXQCV"><span class="Type__TypeElement-sc-goli3j-0 gkqrGP main-rootlist-textWrapper" dir="auto">acousticy pop</span></a>
-                                          <div class="main-rootlist-statusIcons"></div>
-                                       </li>
-                                    </div>
-                                    <div class="GlueDropTarget GlueDropTarget--albums GlueDropTarget--tracks GlueDropTarget--local-tracks GlueDropTarget--episodes GlueDropTarget--playlists GlueDropTarget--folders">
-                                       <li role="listitem" class="main-rootlist-rootlistItem" draggable="true" style="--indentation:0;">
-                                          <div aria-hidden="true" class="main-rootlist-rootlistItemOverlay"></div>
-                                          <a class="standalone-ellipsis-one-line main-rootlist-rootlistItemLink" draggable="false" tabindex="-1" href="/playlist/77rsPGBhxYDyFGIhpROyn4"><span class="Type__TypeElement-sc-goli3j-0 gkqrGP main-rootlist-textWrapper" dir="auto">Better playlist</span></a>
-                                          <div class="main-rootlist-statusIcons">
-                                             <span aria-label="Collaborative Playlist">
-                                                <svg role="img" height="12" width="12" aria-hidden="true" viewBox="0 0 16 16" class="Svg-sc-ytk21e-0 uPxdw">
-                                                   <path d="M3.849 10.034c-.021-.465.026-.93.139-1.381H1.669c.143-.303.375-.556.665-.724l.922-.532a1.631 1.631 0 00.436-2.458 1.809 1.809 0 01-.474-1.081c-.01-.19.01-.38.057-.563a1.123 1.123 0 01.627-.7 1.2 1.2 0 01.944 0c.149.065.282.161.392.281.108.12.188.263.237.417.049.183.068.372.057.561a1.81 1.81 0 01-.475 1.084 1.6 1.6 0 00-.124 1.9c.36-.388.792-.702 1.272-.927v-.015c.48-.546.768-1.233.821-1.958a3.23 3.23 0 00-.135-1.132 2.657 2.657 0 00-5.04 0c-.111.367-.157.75-.135 1.133.053.724.341 1.41.821 1.955A.126.126 0 012.565 6a.13.13 0 01-.063.091l-.922.532A3.2 3.2 0 00-.004 9.396v.75h3.866c.001-.033-.01-.071-.013-.112zm10.568-3.4l-.922-.532a.132.132 0 01-.064-.091.12.12 0 01.028-.1c.48-.546.768-1.233.821-1.958a3.289 3.289 0 00-.135-1.135A2.635 2.635 0 0012.7 1.233a2.669 2.669 0 00-3.042.64 2.646 2.646 0 00-.554.948c-.11.367-.156.75-.134 1.133.053.724.341 1.41.821 1.955.005.006 0 .011 0 .018.48.225.911.54 1.272.927a1.6 1.6 0 00-.125-1.907 1.809 1.809 0 01-.474-1.081c-.01-.19.009-.38.057-.563a1.123 1.123 0 01.627-.7 1.2 1.2 0 01.944 0c.149.065.282.161.392.281.107.12.187.26.236.413.05.184.07.375.058.565a1.81 1.81 0 01-.475 1.084 1.633 1.633 0 00.438 2.456l.922.532c.29.169.52.421.664.724h-2.319c.113.452.16.918.139 1.383 0 .04-.013.078-.017.117h3.866v-.75a3.2 3.2 0 00-1.58-2.778v.004zm-3.625 6l-.922-.532a.13.13 0 01-.061-.144.122.122 0 01.025-.047 3.33 3.33 0 00.821-1.958 3.229 3.229 0 00-.135-1.132 2.657 2.657 0 00-5.041 0c-.11.367-.156.75-.134 1.133.053.724.341 1.41.821 1.955a.127.127 0 01.028.106.128.128 0 01-.063.091l-.922.532a3.2 3.2 0 00-1.584 2.773v.75h8.75v-.75a3.2 3.2 0 00-1.583-2.781v.004zm-5.5 2.023c.143-.303.375-.556.665-.724l.922-.532a1.63 1.63 0 00.436-2.458 1.809 1.809 0 01-.474-1.081c-.01-.19.009-.38.057-.563a1.123 1.123 0 01.627-.7 1.2 1.2 0 01.944 0c.149.065.282.161.392.281.108.12.188.263.237.417.049.183.068.372.057.561a1.81 1.81 0 01-.475 1.084 1.632 1.632 0 00.438 2.456l.922.532c.29.169.52.421.664.724l-5.412.003z"></path>
-                                                </svg>
-                                             </span>
-                                          </div>
-                                       </li>
-                                    </div>
-                                    <div class="GlueDropTarget GlueDropTarget--albums GlueDropTarget--tracks GlueDropTarget--local-tracks GlueDropTarget--episodes GlueDropTarget--playlists GlueDropTarget--folders">
-                                       <li role="listitem" class="main-rootlist-rootlistItem" draggable="true" style="--indentation:0;">
-                                          <div aria-hidden="true" class="main-rootlist-rootlistItemOverlay"></div>
-                                          <a class="standalone-ellipsis-one-line main-rootlist-rootlistItemLink" draggable="false" tabindex="-1" href="/playlist/4ZxRZ6qHMM8slzRltzvE0D"><span class="Type__TypeElement-sc-goli3j-0 gkqrGP main-rootlist-textWrapper" dir="auto">classics</span></a>
-                                          <div class="main-rootlist-statusIcons"></div>
-                                       </li>
-                                    </div>
-                                    <div class="GlueDropTarget GlueDropTarget--albums GlueDropTarget--tracks GlueDropTarget--local-tracks GlueDropTarget--episodes GlueDropTarget--playlists GlueDropTarget--folders">
-                                       <li role="listitem" class="main-rootlist-rootlistItem" draggable="true" style="--indentation:0;">
-                                          <div aria-hidden="true" class="main-rootlist-rootlistItemOverlay"></div>
-                                          <a class="standalone-ellipsis-one-line main-rootlist-rootlistItemLink" draggable="false" tabindex="-1" href="/playlist/1YEwoiFjQqdtBLW0rWNxTj"><span class="Type__TypeElement-sc-goli3j-0 gkqrGP main-rootlist-textWrapper" dir="auto">shit</span></a>
-                                          <div class="main-rootlist-statusIcons"></div>
-                                       </li>
-                                    </div>
-                                    <div class="GlueDropTarget GlueDropTarget--albums GlueDropTarget--tracks GlueDropTarget--local-tracks GlueDropTarget--episodes GlueDropTarget--playlists GlueDropTarget--folders">
-                                       <li role="listitem" class="main-rootlist-rootlistItem" draggable="true" style="--indentation:0;">
-                                          <div aria-hidden="true" class="main-rootlist-rootlistItemOverlay"></div>
-                                          <a class="standalone-ellipsis-one-line main-rootlist-rootlistItemLink" draggable="false" tabindex="-1" href="/playlist/0PQxSV9QJ05r9ho0WKWO2I"><span class="Type__TypeElement-sc-goli3j-0 gkqrGP main-rootlist-textWrapper" dir="auto">French</span></a>
-                                          <div class="main-rootlist-statusIcons"></div>
-                                       </li>
-                                    </div>
-                                    <div class="GlueDropTarget GlueDropTarget--albums GlueDropTarget--tracks GlueDropTarget--local-tracks GlueDropTarget--episodes GlueDropTarget--playlists GlueDropTarget--folders">
-                                       <li role="listitem" class="main-rootlist-rootlistItem" draggable="true" style="--indentation:0;">
-                                          <div aria-hidden="true" class="main-rootlist-rootlistItemOverlay"></div>
-                                          <a class="standalone-ellipsis-one-line main-rootlist-rootlistItemLink" draggable="false" tabindex="-1" href="/playlist/6hRSc7L7M1ijrgE9u3tJvZ"><span class="Type__TypeElement-sc-goli3j-0 gkqrGP main-rootlist-textWrapper" dir="auto">chill</span></a>
-                                          <div class="main-rootlist-statusIcons"></div>
-                                       </li>
-                                    </div>
-                                    <div class="GlueDropTarget GlueDropTarget--albums GlueDropTarget--tracks GlueDropTarget--local-tracks GlueDropTarget--episodes GlueDropTarget--playlists GlueDropTarget--folders">
-                                       <li role="listitem" class="main-rootlist-rootlistItem" draggable="true" style="--indentation:0;">
-                                          <div aria-hidden="true" class="main-rootlist-rootlistItemOverlay"></div>
-                                          <a class="standalone-ellipsis-one-line main-rootlist-rootlistItemLink" draggable="false" tabindex="-1" href="/playlist/05bjGmRvknQANd5iO2HnQk"><span class="Type__TypeElement-sc-goli3j-0 gkqrGP main-rootlist-textWrapper" dir="auto">Nice Instrumentals</span></a>
-                                          <div class="main-rootlist-statusIcons"></div>
-                                       </li>
-                                    </div>
-                                 </div>
-                                 */
+   
     const customAppHTML = createCustomAppHtml(document.getElementsByClassName("Root__nav-bar")[0]);
-    if(customAppHTML == undefined){
+    const playlistHTML = createPlaylistHtml(document.getElementsByClassName("Root__nav-bar")[0]);
+    if(customAppHTML == undefined || playlistHTML == undefined){
        console.log("Error")
       return;
     } 
+   
    oldHTML = oldHTML.replace(`**INJECTION**`, customAppHTML);
+   oldHTML = oldHTML.replace(`**SECONDINJECTION**`, playlistHTML);
 
 // Replace the contents of of the element with the class "Root__nav-bar" with the old HTML
 document.getElementsByClassName("Root__nav-bar")[0].innerHTML = oldHTML;
 
 // For every "main-navBar-navBarItem" element in the oldHTML, add an event Listener for the click event, when it is clicked, run Spicetify.Platform.History.push() and push the href of the element to the history, also override the default behaviour of the click event
-    const elements = document.getElementsByClassName("main-navBar-navBarItem")
+    let elements = document.getElementsByClassName("main-navBar-navBarItem")
 for (let i = 0; i < elements.length; i++) {
     elements[i].addEventListener("click", function (e) {
         const href = elements[i].getElementsByTagName("a")[0].href
@@ -229,7 +177,19 @@ for (let i = 0; i < elements.length; i++) {
         e.preventDefault();
     });
 }
+   // For every "main-rootlist-rootlistItem" element in the oldHTML, add an event Listener for the click event, when it is clicked, run Spicetify.Platform.History.push() and push the href of the element to the history, also override the default behaviour of the click event
+   elements = document.getElementsByClassName("main-rootlist-rootlistItem")
+   for (let i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function (e) {
+         const href = elements[i].getElementsByTagName("a")[0].href
+         // Strip "https://xpui.app.spotify.com" from the href
+         Spicetify.Platform.History.push(href.replace("https://xpui.app.spotify.com", ""));
+         e.preventDefault();
+      });
+   }
 })();
+
+   
 
 
 function extractCustomAppsFromSidebarHtml(sidebarHtml) {
@@ -246,6 +206,25 @@ function extractCustomAppsFromSidebarHtml(sidebarHtml) {
       })
    return customAppsData
    }
+function extractPlaylistsFromHtml(sidebarHtml){
+      const playlists = []
+      const playlistElements = sidebarHtml.querySelectorAll("li[role='listitem']");
+      console.log(playlistElements)
+
+      playlistElements.forEach((playlistElement) => {
+         const nameElement = playlistElement.querySelector("a[class='yOc9v5MGaitl1r9UpHKg'] span");
+         console.log(nameElement)
+         const hrefElement = playlistElement.querySelector("a[class='yOc9v5MGaitl1r9UpHKg']");
+         console.log(hrefElement)
+         if(nameElement == null || hrefElement == null) return;
+         playlists.push({
+            name: nameElement.textContent,
+            href: hrefElement.getAttribute("href")
+         });
+      });
+      console.log(playlists)
+      return playlists;
+}
 function createCustomAppHtml(newSidebarHtml) {
       if (!newSidebarHtml == null) return;
       const customAppsData = extractCustomAppsFromSidebarHtml(newSidebarHtml)
@@ -265,4 +244,16 @@ function createCustomAppHtml(newSidebarHtml) {
          customAppHtmls.push(customAppHtml)
       })
       return customAppHtmls.join("")
-}
+   }
+   function createPlaylistHtml(newPlaylistHtml) {
+      if (!newPlaylistHtml == null) return;
+      const playlistData = extractPlaylistsFromHtml(newPlaylistHtml)
+      let playlistHtmls = []
+      playlistData.forEach((playlistData) => {
+         const playlistHtml = `<div class="GlueDropTarget GlueDropTarget--albums GlueDropTarget--tracks GlueDropTarget--local-tracks GlueDropTarget--episodes GlueDropTarget--playlists GlueDropTarget--folders">
+         <li role="listitem" class="main-rootlist-rootlistItem" draggable="true" style="--indentation:0;"> <div aria-hidden="true" class="main-rootlist-rootlistItemOverlay"></div> <a class="standalone-ellipsis-one-line main-rootlist-rootlistItemLink" draggable="false" tabindex="-1" href="${playlistData.href}"> <span class="Type__TypeElement-sc-goli3j-0 gkqrGP main-rootlist-textWrapper" dir="auto">${playlistData.name}</span> </a> <div class="main-rootlist-statusIcons"></div> </li> </div>`
+         playlistHtmls.push(playlistHtml)
+      })
+      console.log(playlistHtmls)
+      return playlistHtmls.join("")
+   }
