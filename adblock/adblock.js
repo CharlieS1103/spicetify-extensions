@@ -17,7 +17,7 @@
 
     styleSheet.innerHTML =
         `
-    .MnW5SczTcbdFHxLZ_Z8j, .WiPggcPDzbwGxoxwLWFf, .ReyA3uE3K7oEz7PTTnAn, .main-leaderboardComponent-container, .sponsor-container, a.link-subtle.main-navBar-navBarLink.GKnnhbExo0U9l7Jz2rdc, button[title="Upgrade to Premium"], button[aria-label="Upgrade to Premium"], .main-contextMenu-menuItem a[href="https://www.spotify.com/premium/"] {
+    .MnW5SczTcbdFHxLZ_Z8j, .WiPggcPDzbwGxoxwLWFf, .ReyA3uE3K7oEz7PTTnAn, .main-leaderboardComponent-container, .sponsor-container, a.link-subtle.main-navBar-navBarLink.GKnnhbExo0U9l7Jz2rdc, button[title="Upgrade to Premium"], button[aria-label="Upgrade to Premium"], .main-contextMenu-menuItem a[href^="https://www.spotify.com/premium/"] {
     display: none !important;
     }
     `
@@ -51,7 +51,17 @@
         Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.increaseStreamTime(-100000000000)
     }
     setInterval(delayAds, 720 * 10000);
-
-
+    (async function disableEsperantoAds() {
+        if (!Spicetify.Platform?.UserAPI?._product_state) {
+            setTimeout(disableEsperantoAds, 300);
+            return;
+        }
+        await Spicetify.Platform.UserAPI._product_state.putValues({pairs: { ads: 0 }});
+        Spicetify.Platform.UserAPI._product_state.subValues({ keys: ["ads"] }, ({ pairs }) => {
+            if (pairs.ads !== "0") {
+                Spicetify.Platform.UserAPI._product_state.putValues({ pairs: { ads: "0" }});
+            }
+        });
+    })();
 })()
 
