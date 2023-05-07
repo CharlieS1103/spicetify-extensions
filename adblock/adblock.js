@@ -56,11 +56,10 @@
             setTimeout(disableEsperantoAds, 300);
             return;
         }
-        await Spicetify.Platform.UserAPI._product_state.putValues({pairs: { ads: 0 }});
-        Spicetify.Platform.UserAPI._product_state.subValues({ keys: ["ads"] }, ({ pairs }) => {
-            if (pairs.ads !== "0") {
-                Spicetify.Platform.UserAPI._product_state.putValues({ pairs: { ads: "0" }});
-            }
+        await Spicetify.Platform.UserAPI._product_state.putOverridesValues({ pairs: { ads: 0, catalogue: 'premium', product: 'premium' } });
+        Spicetify.Platform.UserAPI._product_state.subValues({}, ({ pairs }) => {
+            console.log("Disabled Esperanto ads");
+            Spicetify.Platform.UserAPI._product_state.putOverridesValues({ pairs: { ads: 0, catalogue: 'premium', product: 'premium' } });
         });
     })();
 })()
