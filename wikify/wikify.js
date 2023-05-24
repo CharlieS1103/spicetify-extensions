@@ -25,7 +25,8 @@
         setTimeout(WikiFy, 10);
         return;
     }
-    const lang = Spicetify.Locale._locale;
+    // @ts-ignore
+    const lang = Spicetify.Locale.getLocale();
     const buttontxt = "View Wiki"
     //Watch for when the song is changed
 
