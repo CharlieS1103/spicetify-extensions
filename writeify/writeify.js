@@ -21,14 +21,14 @@
 async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-// TODO: Make this more efficent
+/* TODO: Fix this part
   Platform.History.listen(async ({ pathname }) => {
     if (pathname.includes("/playlist")) {
       await sleep(2500)
       insertTrackNotes(".main-trackList-trackListRow");
     }
   });
-
+*/
 
 
 
