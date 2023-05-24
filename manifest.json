@@ -41,5 +41,12 @@
     "preview": "phraseToPlaylist/phraseToPlaylist.png",
     "main": "phraseToPlaylist/phraseToPlaylist.js",
     "readme": "phraseToPlaylist/README.md"
+  },
+  {
+    "name": "Writeify",
+    "description": "Take notes on songs, albums, and artists",
+    "preview": "writeify/writeify.png",
+    "main": "writeify/writeify.js",
+    "readme": "writeify/README.md"
   }
 ]
