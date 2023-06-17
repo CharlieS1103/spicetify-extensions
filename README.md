@@ -1,6 +1,6 @@
 # spicetify-extensions
 
-## Song-Stats:
+## [Song-Stats:](./songstats/README.md)
 
 *Displays the audio features of a song*
 
@@ -8,7 +8,7 @@
 
 * Right click any song and click *View Song Stats* in the context menu
 
-## Feature Shuffle:
+## [Feature Shuffle:](./featureshuffle/README.md)
 
 *Creates a randomized playlist based on the average audio features of the clicked playlist*
 
@@ -16,7 +16,7 @@
 
 * Right click a playlist and click *Create Feature Based Playlist*, note that it may take up to ~3 minutes to generate a playlist.
 
-## Wikify:
+## [Wikify:](./wikify/README.md)
 
 *Display an Artists Wikipedia page and learn more about them!*
 
@@ -24,7 +24,7 @@
 
 * Right click a playlist and click *View Wiki*
 
-## FixEnhance:
+## [FixEnhance:](./old-sidebar/README.md)
 
 *Patches spotify enhance playlist feature (Spotify patched it themselves, however if you prefer an old version this should fix it for you)*
 
@@ -35,7 +35,7 @@
 ``spicetify apply``.
 You must also enable the "Enable Enhance Playlist UI and functionality" feature in the experimental features menu.
 
-## AdBlock:
+## [AdBlock:](./adblock/README.md)
 
 *Blocks ads on Spotify, UI and Audio.*
 
@@ -43,7 +43,7 @@ You must also enable the "Enable Enhance Playlist UI and functionality" feature 
 
 * No action necessary.
 
-## FormatColors:
+## [FormatColors:](./formatColors/README.md)
 
 *Convert the current colors defined in root to color.ini format, made for Theme Developers.*
 
@@ -51,7 +51,7 @@ You must also enable the "Enable Enhance Playlist UI and functionality" feature 
 
 * Click the button on the topbar, right click the text and click copy.
 
-## PhraseToPlaylist:
+## [PhraseToPlaylist:](./phraseToPlaylist/README.md)
 
 *Convert a phrase into a playlist with songs arraged to make that phrase*
 
