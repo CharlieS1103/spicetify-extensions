@@ -8,12 +8,12 @@
 
 (function adblock() {
     const { Platform } = Spicetify;
-    if (!(Platform)) {
+    if (!Platform) {
         setTimeout(adblock, 300)
         return
     }
 
-    var styleSheet = document.createElement("style")
+    const styleSheet = document.createElement("style")
 
     styleSheet.innerHTML =
         `
@@ -21,9 +21,11 @@
     display: none !important;
     }
     `
-    document.body.appendChild(styleSheet)
-    delayAds()
-    var billboard = Spicetify.Platform.AdManagers.billboard.displayBillboard;
+    document.body.appendChild(styleSheet);
+    
+    delayAds();
+    
+    const billboard = Spicetify.Platform.AdManagers.billboard.displayBillboard;
     Spicetify.Platform.AdManagers.billboard.displayBillboard = function (arguments) {
         Spicetify.Platform.AdManagers.billboard.finish()
         // hook before call
@@ -45,21 +47,32 @@
         });
         return ret;
     };
-    function delayAds() {
-        console.log("Ads delayed: Adblock.js")
-        Spicetify.Platform.AdManagers.audio.audioApi.cosmosConnector.increaseStreamTime(-100000000000)
-        Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.increaseStreamTime(-100000000000)
-    }
-    setInterval(delayAds, 720 * 10000);
+
+    async function delayAds() {
+        await Spicetify.Platform.UserAPI._product_state.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
+        
+        // Keeping these as safety measures
+        Spicetify.Platform.AdManagers.audio.audioApi.cosmosConnector.increaseStreamTime(-100000000000);
+        Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.increaseStreamTime(-100000000000);
+        
+        await Spicetify.Platform.AdManagers.audio.disable();
+        await Spicetify.Platform.AdManagers.billboard.disable();
+        await Spicetify.Platform.AdManagers.leaderboard.disableLeaderboard();
+        await Spicetify.Platform.AdManagers.sponsoredPlaylist.disable();
+        
+        console.log("[Adblock] Ads disabled", Spicetify.Platform.AdManagers);
+    };
+
+    setInterval(delayAds, 30 * 10000);
+    
     (async function disableEsperantoAds() {
         if (!Spicetify.Platform?.UserAPI?._product_state) {
             setTimeout(disableEsperantoAds, 300);
             return;
         }
         await Spicetify.Platform.UserAPI._product_state.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
-        Spicetify.Platform.UserAPI._product_state.subValues({}, ({ pairs }) => {
-            console.log("Disabled Esperanto ads", pairs);
-            Spicetify.Platform.UserAPI._product_state.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
+        Spicetify.Platform.UserAPI._product_state.subValues({ keys: ["ads"] }, () => {
+            delayAds();
         });
     })();
 })()
