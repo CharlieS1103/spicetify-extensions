@@ -55,11 +55,12 @@
         Spicetify.Platform.AdManagers.audio.audioApi.cosmosConnector.increaseStreamTime(-100000000000);
         Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.increaseStreamTime(-100000000000);
         
-        Spicetify.Platform.AdManagers.audio.disable();
-        Spicetify.Platform.AdManagers.billboard.disable();
-        Spicetify.Platform.AdManagers.leaderboard.disableLeaderboard();
-        Spicetify.Platform.AdManagers.sponsoredPlaylist.disable();
-        console.log("[Adblock] Ads disabled");
+        await Spicetify.Platform.AdManagers.audio.disable();
+        await Spicetify.Platform.AdManagers.billboard.disable();
+        await Spicetify.Platform.AdManagers.leaderboard.disableLeaderboard();
+        await Spicetify.Platform.AdManagers.sponsoredPlaylist.disable();
+        
+        console.log("[Adblock] Ads disabled", Spicetify.Platform.AdManagers);
     };
 
     setInterval(delayAds, 30 * 10000);
