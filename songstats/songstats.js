@@ -16,6 +16,7 @@
     var local_language = Spicetify.Locale._locale
     const translation = {
         "en": {
+            "titletxt": "Song Stats",
             "buttontxt": "View Song Stats",
             "danceability": "Danceability",
             "energy": "Energy",
@@ -29,6 +30,7 @@
             "tempo": "Tempo",  
         },
         "fr": {
+            "titletxt": "Statistique de la musique",
             "buttontxt": "Voir les statistique de la musique",
             "danceability": "Capacité à danser",
             "energy": "Énergie",
@@ -42,6 +44,7 @@
             "tempo": "Tempo",  
         },
         "fr-CA": {
+            "titletxt": "Statistique de la musique",
             "buttontxt": "Voir les statistique de la musique",
             "danceability": "Capacité à danser",
             "energy": "Énergie",
@@ -53,12 +56,27 @@
             "liveness": "vivacité",
             "valence": "Mood",
             "tempo": "Tempo",  
+        },
+        "cs": {
+            "titletxt": "Statistiky písně",
+            "buttontxt": "Zobrazit statistiky písně",
+            "danceability": "Tančitelnost",
+            "energy": "Energie",
+            "key": "Tónina",
+            "loudness": "Hlasitost",
+            "speechiness": "Mluvenost",
+            "acousticness": "Akustičnost",
+            "instrumentalness": "Nástrojovost",
+            "liveness": "Živost",
+            "valence": "Emoční náboj",
+            "tempo": "Tempo"
         }
     }
 
     try{translation[local_language]["buttontxt"]}
     catch{local_language ="en"}
-    
+
+    const titletxt = translation[local_language]["titletxt"]
     const buttontxt = translation[local_language]["buttontxt"]
     const danceability = translation[local_language]["danceability"]
     const energy = translation[local_language]["energy"]
@@ -81,7 +99,7 @@
         const res = await CosmosAsync.get('https://api.spotify.com/v1/audio-features/' + uriFinal);
 
         Spicetify.PopupModal.display({
-            title: "Song Stats",
+            title: `${titletxt}`,
             content: `${danceability}: ${Math.round(100 * res.danceability)}% | ${energy}: ${Math.round(100 * res.energy)}% <br> ${key}: ${res.key} | ${loudness}: ${res.loudness} <br> ${speechiness}: ${Math.round(100 * res.speechiness)}% | ${acousticness}: ${Math.round(100 * res.acousticness)}% <br> ${instrumentalness}: ${Math.round(100 * res.instrumentalness)}% | ${liveness}: ${Math.round(100 * res.liveness)}% <br> ${valence}: ${Math.round(100 * res.valence)}% | ${tempo}: ${res.tempo} BPM`,
         });
     }
