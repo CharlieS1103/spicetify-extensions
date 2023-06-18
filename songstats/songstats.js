@@ -2,7 +2,7 @@
 
 // NAME: SongStats
 // AUTHOR: CharlieS1103
-// DESCRIPTION: View a songs stats, such as dancability and acousticness.
+// DESCRIPTION: View a songs stats, such as danceability and acousticness.
 
 /// <reference path="../../spicetify-cli/globals.d.ts" />
 
@@ -27,7 +27,7 @@
             "instrumentalness": "Instrumentalness",
             "liveness": "Liveness",
             "valence": "Valence",
-            "tempo": "Tempo",  
+            "tempo": "Tempo",
         },
         "fr": {
             "titletxt": "Statistique de la musique",
@@ -41,7 +41,7 @@
             "instrumentalness": "instrumentalité",
             "liveness": "vivacité",
             "valence": "Mood",
-            "tempo": "Tempo",  
+            "tempo": "Tempo",
         },
         "fr-CA": {
             "titletxt": "Statistique de la musique",
@@ -55,7 +55,7 @@
             "instrumentalness": "instrumentalité",
             "liveness": "vivacité",
             "valence": "Mood",
-            "tempo": "Tempo",  
+            "tempo": "Tempo",
         },
         "cs": {
             "titletxt": "Statistiky písně",
@@ -98,9 +98,69 @@
         const uriFinal = uri.split(":")[2]
         const res = await CosmosAsync.get('https://api.spotify.com/v1/audio-features/' + uriFinal);
 
+        const pitchClasses = [
+            "C",
+            "C♯/D♭",
+            "D",
+            "D♯/E♭",
+            "E",
+            "F",
+            "F♯/G♭",
+            "G",
+            "G♯/A♭",
+            "A",
+            "A♯/B♭",
+            "B"
+        ];
+
+        let keyText = res.key;
+        if (res.key === -1) {
+            keyText = "Undefined";
+        } else {
+            const pitchClassIndex = res.key;
+            keyText = pitchClasses[pitchClassIndex];
+        }
+
         Spicetify.PopupModal.display({
             title: `${titletxt}`,
-            content: `${danceability}: ${Math.round(100 * res.danceability)}% | ${energy}: ${Math.round(100 * res.energy)}% <br> ${key}: ${res.key} | ${loudness}: ${res.loudness} <br> ${speechiness}: ${Math.round(100 * res.speechiness)}% | ${acousticness}: ${Math.round(100 * res.acousticness)}% <br> ${instrumentalness}: ${Math.round(100 * res.instrumentalness)}% | ${liveness}: ${Math.round(100 * res.liveness)}% <br> ${valence}: ${Math.round(100 * res.valence)}% | ${tempo}: ${res.tempo} BPM`,
+            content: `<style>
+                    .stats-table {
+                        display: table;
+                        width: 100%;
+                    }
+
+                    .stats-row {
+                        display: table-row;
+                    }
+
+                    .stats-cell {
+                        display: table-cell;
+                        padding: 5px;
+                        font-weight: bold;
+                    }
+                </style>
+                <div class="stats-table">
+                    <div class="stats-row">
+                        <div class="stats-cell">${danceability}: ${Math.round(100 * res.danceability)} %</div>
+                        <div class="stats-cell">${energy}: ${Math.round(100 * res.energy)} %</div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stats-cell">${key}: ${keyText}</div>
+                        <div class="stats-cell">${loudness}: ${res.loudness} dB</div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stats-cell">${speechiness}: ${Math.round(100 * res.speechiness)} %</div>
+                        <div class="stats-cell">${acousticness}: ${Math.round(100 * res.acousticness)} %</div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stats-cell">${instrumentalness}: ${Math.round(100 * res.instrumentalness)} %</div>
+                        <div class="stats-cell">${liveness}: ${Math.round(100 * res.liveness)} %</div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stats-cell">${valence}: ${Math.round(100 * res.valence)} %</div>
+                        <div class="stats-cell">${tempo}: ${res.tempo} BPM</div>
+                    </div>
+                </div>`,
         });
     }
     function shouldDisplayContextMenu(uris) {
@@ -116,11 +176,10 @@
         return false;
     }
 
-
     const cntxMenu = new Spicetify.ContextMenu.Item(
         buttontxt,
         getSongStats,
-        shouldDisplayContextMenu,
+        shouldDisplayContextMenu
     );
 
     cntxMenu.register();
