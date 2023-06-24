@@ -26,6 +26,7 @@
     delayAds();
     
     const billboard = Spicetify.Platform.AdManagers.billboard.displayBillboard;
+
     Spicetify.Platform.AdManagers.billboard.displayBillboard = function (arguments) {
         Spicetify.Platform.AdManagers.billboard.finish()
         // hook before call
@@ -49,12 +50,12 @@
     };
 
     async function delayAds() {
-        await Spicetify.Platform.UserAPI._product_state.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
-        
-        // Keeping these as safety measures
+        if(Spicetify.Platform?.UserAPI?._product_state.putOverridesValues) {
+            await Spicetify.Platform.UserAPI._product_state.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
+        }
+
         Spicetify.Platform.AdManagers.audio.audioApi.cosmosConnector.increaseStreamTime(-100000000000);
         Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.increaseStreamTime(-100000000000);
-        
         await Spicetify.Platform.AdManagers.audio.disable();
         await Spicetify.Platform.AdManagers.billboard.disable();
         await Spicetify.Platform.AdManagers.leaderboard.disableLeaderboard();
