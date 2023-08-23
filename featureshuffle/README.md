@@ -6,7 +6,7 @@
 
 ## Install
 
-Copy `FeatureShuffle.js` into your [Spicetify](https://github.com/khanhas/spicetify-cli) extensions directory:
+Copy `featureshuffle.js` into your [Spicetify](https://github.com/khanhas/spicetify-cli) extensions directory:
 | **Platform**   | **Path**                                                                             |
 |----------------|--------------------------------------------------------------------------------------|
 | **Linux**      | `~/.config/spicetify/Extensions` or `$XDG_CONFIG_HOME/.config/spicetify/Extensions/` |
