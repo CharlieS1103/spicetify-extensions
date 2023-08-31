@@ -2,7 +2,7 @@
 
 [Spicetify](https://github.com/khanhas/spicetify-cli) extension to see the audio features of the music you like!
 
-* Right click a song and click "V"iew Song Stats" to see it's audio features.
+* Right click a song and click "View Song Stats" to see it's audio features.
 
 ## Install
 
