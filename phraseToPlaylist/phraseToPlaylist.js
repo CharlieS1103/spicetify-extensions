@@ -37,9 +37,10 @@ var offsetnum = 0;
 function createTextArea(){
     const container = document.createElement("div");
     container.innerHTML = `
-<textarea id="playlist-phrase-box" name="playlist-phrase-box" rows="4" cols="30" placeholder="Input phrase here!"></textarea>
+    <textarea id="playlist-phrase-box" cols="50" name="playlist-phrase-box" rows="4" placeholder="Input phrase here!"></textarea>
+  
   <br><br>
-  <span id="phrase-loading-indicator" name="phrase-loading-indicator" >0/0</span>
+  <span id="phrase-loading-indicator" name="phrase-loading-indicator" >0 / 0</span> &emsp;
   <button value="Submit" id="playlist-phrase-submit">Submit Phrase</button>
     `;
     return container;
@@ -58,68 +59,77 @@ async function addCustomCssListeners() {
 }
 
 async function generatePlaylist(phrase){
-    phrase = phrase.replace(/[^\w\s]|_/g, "").replace(/\s+/g, ' ')
-    phrase = phrase.split(" ");
-    const songArr = []
+    phrase = phrase.replace(/[^\w\s\-]|_/g, "").replace(/\s+/g, ' ')
+    phrase = phrase.replace(/^\ |\ $/g, "").split(" "); //replace spaces at start and end of string so those don't become their own substrings
+    const songArr = [],
+          songMapCache = {};
     offset = "";
     for (var i = 0; i < phrase.length; i++) {
-        var span = document.querySelector("#phrase-loading-indicator"),
-            text = document.createTextNode('' + i + "/" + phrase.length);
-        span.innerHTML = ''; // clear existing
-        span.appendChild(text);
-        if (phrase[i] in songMap) {
-            songArr.push("spotify:track:" + songMap[phrase[i]])
+        var spanProgress = document.querySelector("#phrase-loading-indicator"),
+            progressText = document.createTextNode('' + i + " / " + phrase.length),
+            textarea = document.querySelector("#playlist-phrase-box"),
+            currentText = "";
+        spanProgress.innerHTML = '';
+        textarea.innerHTML = ''; // clear existing
+        for (var o = 0; o < i+1; o++) {
+            var prefix = o == i ? ">  " : "✓ ";
+            currentText += prefix + phrase[o] + "\n";
+        }
+        textarea.scrollTop = textarea.scrollHeight; //scroll to bottom of now longer text box
+        spanProgress.appendChild(progressText);
+        textarea.value = currentText;
+        if (phrase[i] in songMap || phrase[i].toUpperCase() in songMap) { //maybe one of the values in the song map (i.e. the alphabet) is only there in uppercase.
+            phrase[i] in songMap ? songArr[i] = "spotify:track:" + songMap[phrase[i]] : songArr[i] = "spotify:track:" + songMap[phrase[i].toUpperCase()];
+            console.log("Found cached song in phrase: " + phrase[i] + ", using track: " + songMap[phrase[i]]);
+        } else if (phrase[i] in songMapCache) {
+            console.log("Found repeating song in phrase: " + phrase[i] + ", using track: " + songMapCache[phrase[i]]);
+            songArr[i] = "spotify:track:" + songMapCache[phrase[i]];
         } else {
-             // TODO: Optimize this! I could save the phrase to a specific song so repeating words would go much faster
             const songJson = await searchSong(phrase[i]);
-            songArr.push("spotify:track:" + songJson.id)
-          
+            songArr[i] = "spotify:track:" + songJson;
+            songMapCache[phrase[i]] = songJson;
         }
-        
-            
-        }
+    }
+    console.log("song array: " + JSON.stringify(songArr));
     createPlaylist(songArr)
 }
 
+// https://www.history.com/topics/black-history/i-have-a-dream-speech - example 
 async function searchSong(songName) {
-   
+    const FallbackTrack = "1qcn9qzMCyBDnYy0dYN824";
     let songFound = false;
-    const fallBackSongJson = await Spicetify.CosmosAsync.get('https://api.spotify.com/v1/search?q=track:' + songName + '&type=track&limit=50')
-    while(!songFound){
-        try{
-        const songJson = await Spicetify.CosmosAsync.get('https://api.spotify.com/v1/search?q=track:' + songName + '&type=track&limit=50' + offset)
-            for (var e = 0; e < songJson.tracks.items.length; e++) {
-                const item = songJson.tracks.items[e];
-
-                if (item.name.toLowerCase() == songName.toLowerCase()) {
-                    console.log("Found! ")
-                    offsetnum=0
-                    offset = ""
-                    return item;
-                } else if (e == 49) {
-                    offset = `&offset=${offsetnum}`
-                    if (offsetnum == 999) {
-                        return songJson.tracks.items[0]
-                    }
-                    if (offsetnum != 1000) {
-                        offsetnum = offsetnum + 50;
-                    }
-
+    try {
+        const songJSON = await Spicetify.CosmosAsync.get('https://api.spotify.com/v1/search?q=' + songName + '&type=track&market=US&limit=50&offset=51');
+        //console.log("Tracks JSON: " + JSON.stringify(songJSON));
+        for (var i = 0; i < songJSON.tracks.items.length; i++) {
+            const asn = songJSON.tracks.items[i].name;
+            console.log("JSON Comparison for " + songName + " === " + asn);
+            if (asn === songName || asn === (songName.charAt(0).toUpperCase() + songName.slice(1)) ||asn === songName.toLowerCase() || asn === songName.toUpperCase()) {
+                console.log("Found song for word: " + songName + ", with id: " + songJSON.tracks.items[i].id);
+                //console.log("Tracks JSON: " + JSON.stringify(songJSON));
+                songFound = true;
+                return songJSON.tracks.items[i].id;
+            }
+        }
+    } catch (err) {
+        return FallbackTrack;
+    }
+    /* more fallback, unsure about this
+    while (!songFound) {}
+        for (var offCounter = 0; offCounter < 100; offCounter += 50) {
+            var fallbackSongJSON = await Spicetify.CosmosAsync.get('https://api.spotify.com/v1/search?q=' + songName + '&type=track&limit=50&offset='+offCounter)
+            for (var i = 0; i < fallbackSongJSON.tracks.items; i++) {
+                const asn = fallbackSongJSON.tracks.items[i].name; //Album Song Name
+                if ((asn === songName || asn === songName.toLowerCase() || asn === songName.toUpperCase()) && !songFound) {
+                    console.log("Found song for word: " + songName + ", with id: " + fallbackSongJSON.tracks.items[i].id);
+                    console.log("Tracks JSON: " + JSON.stringify(fallbackSongJSON));
+                    return fallbackSongJSON.tracks.items[i].id;
                 }
             }
-        }catch(err){
-            offsetnum = 0
-            offset = ""
-            return fallBackSongJson.tracks.items[0]
         }
-       
-    }
-  
-    /* const item = {
-         id: "1W6qKv7nOWDbULZepUafbc"
-    };
-    return item
     */
+    //if SOMEHOW after ALL that the song still hasn't been found, return a hardcoded song. Alternative would be c418's "this doesnt work"
+    return "1qcn9qzMCyBDnYy0dYN824";
 }
 
 async function createPlaylist(songArr){
@@ -139,8 +149,20 @@ async function createPlaylist(songArr){
     const span = document.querySelector("#phrase-loading-indicator")
     span.remove();
 }
-
+//replace numbers with https://open.spotify.com/album/1R3C4VebWmWXFlbTSnnLql
 const songMap = {
+    "TREE": "5nW41zamR8GqKYUxvxo12d",
+    "tree": "7GHvxGxbVsFIuRjeCLWmlK",
+    "Tree": "2W78ebvSU2mZF2eYb0xM9m",
+    "that": "3mJCHAKdmZDINjCEEYMEkq",
+    "THAT": "6hbfVquDat90Nv09n05ZnN",
+    "That": "5XZTPT1jb4fEfmluLKmm4B",
+    "you": "5Wdl4yFoXOX1xmA53udLyZ",
+    "YOU": "6cVNYlO75XZ3UZnglTF6WI",
+    "You": "6lbme14HiDWYmGiw1I2Dv6",
+    "our": "5JTjuEFoIfQgP90nvOCWEj",
+    "OUR": "5YhTy3qCTc2RELqbHKv94A",
+    "Our": "4WLnE7W9K41HdRz1rHpz5T",
     "it": "6eG4JMN3f4WLgj1ElfuMUV",
     "for": "3beItkavCW1qXszPbFbijD",
     "is": "1epDL4xhczbpzkXIeGXZzb",
@@ -153,7 +175,16 @@ const songMap = {
     "we": "0BSI1Epu3YeVwXF1bvL8oH",
     "to": "4n3lfhTDOaFe9a1c4FPPSB",
     "and": "2YsrYsusAKqYD74ipCRxvz",
-    "I": "0hJZZMFlSVmtQjOYGKnFng",
+    "0": "3GzRIROhugr0XHjrOvyDRP",
+    "1": "6odUoTQeCN0jw3yPkhrHjH",
+    "2": "4QWj8up5FDq9xDvpoteuYA",
+    "3": "2d7fRuDlFZfKIoSuf8bhGv",
+    "4": "15JCb0qRFpfkiYw4Dk2fzg",
+    "5": "5iBHmIRE11HL2Z4qjTEpQl",
+    "6": "5DqwziN7E9MduNZ2m8D7aK",
+    "7": "5ykbOijJEfRhuo2Td1m0Qd",
+    "8": "6X29iaaazwho3ab7GNue5r",
+    "9": "3bpChor7yT387M9pR3u38p",
     "A": "5uYalrRxXbbK7N8vYlXWFO",
     "B": "4oViUMnlTQhI9gJwEhUgv5",
     "C": "3Cv7jBCoHsV6ZnajqZk02J",
@@ -200,7 +231,6 @@ const songMap = {
     "In": "2vec1SirAf9NVU5YFpYKWo",
     "As": "13toFl1UwJPsRxDiD9jgtn",
     "Of": "313l4VILjTvipoamGptl5h",
-    "it": "0fhtzovxxB0dv2q54haIPo",
     "By": "5C4sp6JprCFTO9ZQcg4qXs",
     "On": "167c1Blr84k9YpSCHLNh9m",
     "So": "7GlurUXL0ZsZYq1YMimC5u",
