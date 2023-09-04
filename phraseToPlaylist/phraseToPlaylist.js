@@ -79,9 +79,9 @@ async function generatePlaylist(phrase){
         textarea.value = currentText;
         if (phrase[i] in songMap || phrase[i].toUpperCase() in songMap) { //maybe one of the values in the song map (i.e. the alphabet) is only there in uppercase.
             phrase[i] in songMap ? songArr[i] = "spotify:track:" + songMap[phrase[i]] : songArr[i] = "spotify:track:" + songMap[phrase[i].toUpperCase()];
-            console.log("[P2P]: (Cache)     Found cached song for word:\t\t " + phrase[i] + ",\t with track:\t" + songMap[phrase[i]]);
+            //console.log("[P2P]: (Cache)     Found cached song for word:\t\t " + phrase[i] + ",\t with track:\t" + songMap[phrase[i]]);
         } else if (phrase[i] in songMapCache) {
-            console.log("[P2P]: (Cache)     Found repeating song for word:\t " + phrase[i] + ",\t with track:\t" + songMapCache[phrase[i]]);
+            //console.log("[P2P]: (Cache)     Found repeating song for word:\t " + phrase[i] + ",\t with track:\t" + songMapCache[phrase[i]]);
             songArr[i] = "spotify:track:" + songMapCache[phrase[i]];
         } else {
             const songJson = await searchSong(phrase[i]);
@@ -112,13 +112,13 @@ async function searchSong(songName) {
         for (var i = 0; i < songJSON.tracks.items.length; i++) {
             //console.log("JSON Comparison for " + songName + " === " + songJSON.tracks.items[i].name);
             if (await isSameSong(songName, songJSON.tracks.items[i].name)) {
-                console.log("[P2P]: (Search)    Found API song for word:\t\t\t " + songName + ",\twith track:\t" + songJSON.tracks.items[i].id);
+                //console.log("[P2P]: (Search)    Found API song for word:\t\t\t " + songName + ",\twith track:\t" + songJSON.tracks.items[i].id);
                 songFound = true;
                 return songJSON.tracks.items[i].id;
             }
         }
     } catch (err) {
-        console.log("[P2P]: (API Error) Error while searching for word:\t\t\t " + songName + ",\tusing Error Track");
+        //console.log("[P2P]: (API Error) Error while searching for word:\t\t\t " + songName + ",\tusing Error Track");
         return "ht4un5PoFxGjGFpERh7kkq0a"; //TRACK: "This Doesn't Work"
     }
     //FALLBACK SEARCH - Better for longer song names and more rare ones
@@ -128,13 +128,13 @@ async function searchSong(songName) {
         for (var i = 0; i < fallbackSongJSON.tracks.items.length; i++) {
             //console.log("(Fallback) JSON Comparison for " + songName + " === " + fallbackSongJSON.tracks.items[i].name);
             if (await isSameSong(songName, fallbackSongJSON.tracks.items[i].name) && !songFound) {
-                console.log("[P2P]: (Fallback)  Found API song for word:\t\t\t " + songName + ",\twith track:\t" + fallbackSongJSON.tracks.items[i].id);
+                //console.log("[P2P]: (Fallback)  Found API song for word:\t\t\t " + songName + ",\twith track:\t" + fallbackSongJSON.tracks.items[i].id);
                 return fallbackSongJSON.tracks.items[i].id;
             }
         }
         offsetCounter += 50;
     }
-    console.log("[P2P]: (Not Found) Couldn't find track for word:\t\t\t " + songName + ",\tusing Not Found Track");
+    //console.log("[P2P]: (Not Found) Couldn't find track for word:\t\t\t " + songName + ",\tusing Not Found Track");
     return "1qcn9qzMCyBDnYy0dYN824"; //TRACK: "This Song Doesn't Exist Because I Don't Like Effort"
 }
 
