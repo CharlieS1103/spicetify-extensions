@@ -40,7 +40,11 @@
     "description": "Convert a phrase into a playlist with songs arraged to make that phrase",
     "preview": "phraseToPlaylist/phraseToPlaylist.png",
     "main": "phraseToPlaylist/phraseToPlaylist.js",
-    "readme": "phraseToPlaylist/README.md"
+    "readme": "phraseToPlaylist/README.md",
+    "authors": [
+      { "name": "CharlieS1103", "url": "https://github.com/CharlieS1103" },
+      { "name": "MalTeeez", "url": "https://github.com/MalTeeez" }
+  ]
   },
   {
     "name": "Writeify",

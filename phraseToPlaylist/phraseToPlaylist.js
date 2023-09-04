@@ -1,7 +1,7 @@
 //@ts-check
 
 // NAME: phraseToPlaylist
-// AUTHOR: CharlieS1103
+// AUTHOR: CharlieS1103, MalTeeez
 // DESCRIPTION: Convert a phrase into a playlist with songs arraged to make that phrase.
 
 /// <reference path="../../spicetify-cli/globals.d.ts" />
@@ -50,6 +50,7 @@ async function addCustomCssListeners() {
     const textarea = document.querySelector("#playlist-phrase-box");
 
     const submit = document.querySelector("#playlist-phrase-submit");
+    if (submit)
     submit.addEventListener("click", function (event) {
         // @ts-ignore
         generatePlaylist(textarea.value)
@@ -68,6 +69,10 @@ async function generatePlaylist(phrase){
             progressText = document.createTextNode('' + i + " / " + phrase.length),
             textarea = document.querySelector("#playlist-phrase-box"),
             currentText = "";
+        if(spanProgress == null || progressText == null || textarea == null || currentText == null) {
+            console.log("[P2P]: (Error)     Error while generating playlist, aborting.");
+            return;
+        }
         spanProgress.innerHTML = '';
         textarea.innerHTML = ''; // clear existing
         for (var o = 0; o < i+1; o++) {
@@ -76,6 +81,7 @@ async function generatePlaylist(phrase){
         }
         textarea.scrollTop = textarea.scrollHeight; //scroll to bottom of now longer text box
         spanProgress.appendChild(progressText);
+        // @ts-ignore
         textarea.value = currentText;
         if (phrase[i] in songMap || phrase[i].toUpperCase() in songMap) { //maybe one of the values in the song map (i.e. the alphabet) is only there in uppercase.
             phrase[i] in songMap ? songArr[i] = "spotify:track:" + songMap[phrase[i]] : songArr[i] = "spotify:track:" + songMap[phrase[i].toUpperCase()];
@@ -160,8 +166,10 @@ async function createPlaylist(songArr){
         }
     }
     const span = document.querySelector("#phrase-loading-indicator")
+    if(span){
     span.innerHTML = '';
     span.appendChild(document.createTextNode("Done! "));
+    }
 }
 
 const songMap = {
