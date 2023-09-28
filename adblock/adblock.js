@@ -50,10 +50,13 @@
     };
 
     async function delayAds() {
-        if(Spicetify.Platform?.UserAPI?._product_state.putOverridesValues) {
-            await Spicetify.Platform.UserAPI._product_state.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
+        if (!Spicetify.Platform?.UserAPI) {
+            setTimeout(delayAds, 300);
+            return; 
         }
+        const productState = Spicetify.Platform.UserAPI._product_state || Spicetify.Platform.UserAPI._product_state_service;
 
+        await productState.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
         Spicetify.Platform.AdManagers.audio.audioApi.cosmosConnector.increaseStreamTime(-100000000000);
         Spicetify.Platform.AdManagers.billboard.billboardApi.cosmosConnector.increaseStreamTime(-100000000000);
         await Spicetify.Platform.AdManagers.audio.disable();
@@ -67,12 +70,14 @@
     setInterval(delayAds, 30 * 10000);
     
     (async function disableEsperantoAds() {
-        if (!Spicetify.Platform?.UserAPI?._product_state) {
+        if (!Spicetify.Platform?.UserAPI) {
             setTimeout(disableEsperantoAds, 300);
             return;
         }
-        await Spicetify.Platform.UserAPI._product_state.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
-        Spicetify.Platform.UserAPI._product_state.subValues({ keys: ["ads"] }, () => {
+        const productState = Spicetify.Platform.UserAPI._product_state || Spicetify.Platform.UserAPI._product_state_service;
+        
+        await productState.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
+        productState.subValues({ keys: ["ads"] }, () => {
             delayAds();
         });
     })();
