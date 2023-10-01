@@ -74,12 +74,17 @@
             setTimeout(disableEsperantoAds, 300);
             return;
         }
-        const productState = Spicetify.Platform.UserAPI._product_state || Spicetify.Platform.UserAPI._product_state_service;
+        try{
+            const productState = Spicetify.Platform.UserAPI._product_state || Spicetify.Platform.UserAPI._product_state_service;
         
-        await productState.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
-        productState.subValues({ keys: ["ads"] }, () => {
-            delayAds();
-        });
+            await productState.putOverridesValues({ pairs: { ads: "0", catalogue: "premium", product: "premium", type: "premium" } });
+            productState.subValues({ keys: ["ads"] }, () => {
+                delayAds();
+            });
+        }catch(e){
+            console.log("[Adblock] Product State does not exist", e);
+        }
+       
     })();
 })()
 
